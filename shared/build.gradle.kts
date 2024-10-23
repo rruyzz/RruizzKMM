@@ -24,11 +24,48 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            //put your multiplatform dependencies here
+        sourceSets {
+            val iosX64Main by getting
+            val iosArm64Main by getting
+            val iosSimulatorArm64Main by getting
+            val iosMain by creating {
+                dependsOn(commonMain.get())
+                iosX64Main.dependsOn(this)
+                iosArm64Main.dependsOn(this)
+                iosSimulatorArm64Main.dependsOn(this)
+            }
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
+                implementation(libs.kotlinx.datetime)
+                implementation(libs.koin.core)
+                implementation(libs.sql.coroutines.extensions)
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidx.lifecycle.viewmodel.ktx)
+                implementation(libs.ktor.client.android)
+                implementation(libs.sql.android.driver)
+            }
+        }
+        val iosMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.darwin)
+                implementation(libs.sql.native.driver)
+            }
+        }
+
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.kotlin.test)
+            }
         }
     }
 }
