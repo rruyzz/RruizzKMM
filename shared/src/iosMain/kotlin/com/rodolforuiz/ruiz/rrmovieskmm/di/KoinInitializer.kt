@@ -1,5 +1,6 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.di
 
+import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -13,7 +14,7 @@ fun initKoin() {
     }
 }
 
-class ArticlesInjector : KoinComponent {
+class HomeInjector : KoinComponent {
 
-//    val articlesViewModel: ArticlesViewModel by inject()
+    val homeViewModel: HomeViewModel by inject()
 }

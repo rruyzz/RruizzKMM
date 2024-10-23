@@ -34,14 +34,14 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = getViewModel(),
 ) {
 
-    val articlesState = homeViewModel.articlesState.collectAsState()
+    val homeState = homeViewModel.homeState.collectAsState()
 
     Column {
-        if (articlesState.value.error != null)
-            ErrorMessage(articlesState.value.error!!)
-        if (articlesState.value.movies.isNotEmpty())
+        if (homeState.value.error != null)
+            ErrorMessage(homeState.value.error!!)
+        if (homeState.value.movies.isNotEmpty())
             HomeView(homeViewModel)
-        if (articlesState.value.loading) {
+        if (homeState.value.loading) {
             Loader()
         }
     }
@@ -52,10 +52,10 @@ fun HomeScreen(
 fun HomeView(viewModel: HomeViewModel) {
 
     SwipeRefresh(
-        state = SwipeRefreshState(viewModel.articlesState.value.loading),
+        state = SwipeRefreshState(viewModel.homeState.value.loading),
         onRefresh = { viewModel.getMovie() }) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(viewModel.articlesState.value.movies) { movies ->
+            items(viewModel.homeState.value.movies) { movies ->
                 ArticleItemView(movie = movies)
             }
         }

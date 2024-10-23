@@ -2,15 +2,24 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-//	let greet = Greeting().greet()
-
-	var body: some View {
-		Text("sadsaddsfadsf")
-	}
-}
-
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
+ 
+    var body: some View {
+        let homeScreen = HomeScreen(viewModel: .init())
+        
+        NavigationStack{
+            homeScreen
+                .toolbar {
+                    ToolbarItem {
+                        Button {
+                        } label: {
+                            Label("Sources", systemImage: "list.bullet.rectangle")
+                                .labelStyle(.titleAndIcon)
+                        }
+                    }
+                
+                }
+        }.refreshable {
+            homeScreen.viewModel.homeViewModel.getMovie()
+        }
+    }
 }

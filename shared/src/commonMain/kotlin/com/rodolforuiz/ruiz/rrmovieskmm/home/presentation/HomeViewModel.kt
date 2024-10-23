@@ -10,10 +10,10 @@ class HomeViewModel(
     private val useCase: PopularMoviesUseCase
 ) : BaseViewModel() {
 
-    private val _articlesState: MutableStateFlow<HomeState> =
+    private val _homeState: MutableStateFlow<HomeState> =
         MutableStateFlow(HomeState(loading = true))
 
-    val articlesState: StateFlow<HomeState> get() = _articlesState
+    val homeState: StateFlow<HomeState> get() = _homeState
 
     init {
         getMovie()
@@ -21,11 +21,11 @@ class HomeViewModel(
 
     fun getMovie() {
         scope.launch {
-            _articlesState.emit(HomeState(loading = true))
+            _homeState.emit(HomeState(loading = true))
 
             val fetchedMovies = useCase.getPopularMovie()
 
-            _articlesState.emit(HomeState(movies = fetchedMovies))
+            _homeState.emit(HomeState(movies = fetchedMovies))
         }
     }
 }
