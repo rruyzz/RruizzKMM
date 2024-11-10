@@ -17,6 +17,7 @@ class HomeViewModel(
 
     init {
         getMovie()
+        getPopularMovie()
     }
 
     fun getMovie() {
@@ -28,4 +29,14 @@ class HomeViewModel(
             _homeState.emit(HomeState(movies = useCase.getPopularMovie()))
         }
     }
+
+    fun getPopularMovie() {
+        scope.launch {
+            val fetchedMovies = useCase.getPopularMovie()
+
+            _homeState.emit(HomeState(nowPlayingList = useCase.getPopularMovie()))
+        }
+    }
+
+
 }

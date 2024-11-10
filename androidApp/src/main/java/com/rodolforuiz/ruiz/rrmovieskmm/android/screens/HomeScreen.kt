@@ -55,7 +55,7 @@ fun HomeView(viewModel: HomeViewModel) {
 
         Carousel(viewModel)
 
-        HomeTab()
+        HomeTab(viewModel)
 
     }
 }
@@ -79,7 +79,7 @@ fun ArticleItemView(movie: Movie) {
             .padding(16.dp)
     ) {
         AsyncImage(
-            model = movie.image,
+            model = movie.backdropPath,
             contentDescription = null
         )
         Spacer(modifier = Modifier.height(4.dp))

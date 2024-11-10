@@ -19,7 +19,7 @@ struct ContentView: View {
                 
                 }
         }.refreshable {
-            homeScreen.viewModel.homeViewModel.getMovie()
+//            homeScreen.viewModel.homeViewModel.getMovie()
         }
     }
 }

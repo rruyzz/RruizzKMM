@@ -21,11 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.TabItem
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.tabItems
 
 @Composable
-fun HomeTab() {
+fun HomeTab(viewModel: HomeViewModel) {
     var selectedTabIndex by remember {
         mutableIntStateOf(0)
     }
@@ -85,9 +86,9 @@ fun HomeTab() {
                 contentAlignment = Alignment.Center
             ) {
                 when (tabItems[index]) {
-                    is TabItem.Popular -> Text(text = "1")
-                    is TabItem.TopRated -> Text(text = "1")
-                    is TabItem.NowPlaying -> Text(text = "1")
+                    is TabItem.Popular -> MoviesGrid(viewModel = viewModel)
+                    is TabItem.TopRated -> MoviesGrid(viewModel = viewModel)
+                    is TabItem.NowPlaying -> MoviesGrid(viewModel = viewModel)
                 }
             }
         }

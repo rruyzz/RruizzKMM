@@ -42,11 +42,11 @@ fun Carousel(viewModel: HomeViewModel) {
         val value = viewModel.homeState.value.movies[index]
         Box() {
             Image(
-                painter = rememberAsyncImagePainter(model = value.image),
+                painter = rememberAsyncImagePainter(model = value.backdropPath),
                 contentDescription = value.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .height(350.dp)
+                    .height(200.dp)
                     .fillMaxWidth()
                     .maskClip(shape = MaterialTheme.shapes.extraLarge)
             )

@@ -5,9 +5,13 @@ import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 class HomeRepository(
     private val service: HomeService
 ) {
-    suspend fun getPopularMovie() : List<Movie> {
+    suspend fun getPopularMovie(): List<Movie> {
         return service.getPopularMovies().results?.map {
-            Movie(title = it.titleMovie.orEmpty(), image = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}")
+            Movie(
+                title = it.titleMovie.orEmpty(),
+                backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
+                posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
+            )
         } ?: listOf()
     }
 }
