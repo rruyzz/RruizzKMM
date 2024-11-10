@@ -7,7 +7,7 @@ class HomeRepository(
 ) {
     suspend fun getPopularMovie() : List<Movie> {
         return service.getPopularMovies().results?.map {
-            Movie(title = it.titleMovie.orEmpty(), image = it.posterPath.orEmpty())
+            Movie(title = it.titleMovie.orEmpty(), image = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}")
         } ?: listOf()
     }
 }
