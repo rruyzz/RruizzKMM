@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.TabItem
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.tabItems
 
 @Composable
@@ -68,10 +69,7 @@ fun HomeTab() {
                         selectedTabIndex = index
                     },
                     text = {
-                        Text(
-                            text = item.title,
-//                            style = MaterialTheme.typography.titleSmall
-                        )
+                        Text(text = item.title)
                     },
                 )
             }
@@ -86,11 +84,10 @@ fun HomeTab() {
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                when (tabItems[index].id) {
-                    0 -> Text(text = "1")
-                    1 -> Text(text = "2")
-                    2 -> Text(text = "3")
-
+                when (tabItems[index]) {
+                    is TabItem.Popular -> Text(text = "1")
+                    is TabItem.TopRated -> Text(text = "1")
+                    is TabItem.NowPlaying -> Text(text = "1")
                 }
             }
         }

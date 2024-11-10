@@ -1,22 +1,13 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.home.presentation
 
-
-data class TabItem(
-    val title: String,
-    val id: Int,
-)
+sealed class TabItem(val title: String) {
+    data object NowPlaying : TabItem("Now Playing")
+    data object Popular : TabItem("Popular")
+    data object TopRated : TabItem("Top rated")
+}
 
 val tabItems = listOf(
-    TabItem(
-        title = "Now Playing",
-        id = 0,
-    ),
-    TabItem(
-        title = "Popular",
-        id = 1
-    ),
-    TabItem(
-        title = "Top rated",
-        id = 2,
-    ),
+    TabItem.NowPlaying,
+    TabItem.Popular,
+    TabItem.TopRated,
 )
