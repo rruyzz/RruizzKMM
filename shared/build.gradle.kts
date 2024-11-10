@@ -47,6 +47,9 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.koin.core)
                 implementation(libs.sql.coroutines.extensions)
+                implementation( libs.ktor.client.logging)
+                implementation(libs.kermit)
+
             }
         }
 

@@ -13,8 +13,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -23,8 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.SwipeRefreshState
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.Carousel
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.HomeTab
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
 import org.koin.androidx.compose.getViewModel
@@ -47,19 +45,28 @@ fun HomeScreen(
     }
 }
 
-
 @Composable
 fun HomeView(viewModel: HomeViewModel) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
 
-    SwipeRefresh(
-        state = SwipeRefreshState(viewModel.homeState.value.loading),
-        onRefresh = { viewModel.getMovie() }) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(viewModel.homeState.value.movies) { movies ->
-                ArticleItemView(movie = movies)
-            }
-        }
+        Title()
+
+        Carousel(viewModel)
+
+        HomeTab()
+
     }
+}
+
+@Composable
+fun Title() {
+    Text(
+        text = "What do you want to watch?",
+        style = MaterialTheme.typography.headlineLarge,
+        modifier = Modifier.padding(16.dp, 32.dp)
+    )
 }
 
 @Composable

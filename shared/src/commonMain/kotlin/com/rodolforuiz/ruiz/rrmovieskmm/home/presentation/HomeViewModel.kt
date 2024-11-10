@@ -25,7 +25,7 @@ class HomeViewModel(
 
             val fetchedMovies = useCase.getPopularMovie()
 
-            _homeState.emit(HomeState(movies = fetchedMovies))
+            _homeState.emit(HomeState(movies = useCase.getPopularMovie()))
         }
     }
 }
