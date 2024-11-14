@@ -37,8 +37,8 @@ fun HomeScreen(
 
     Column {
         if (homeState.value.error != null)
-            ErrorMessage(homeState.value.error!!)
-        if (homeState.value.movies.isNotEmpty())
+            ErrorMessage(homeState.value.error ?: "dsfds")
+        if (homeState.value.popularMovies.isNotEmpty())
             HomeView(homeViewModel)
         if (homeState.value.loading) {
             Loader()
@@ -55,7 +55,7 @@ fun HomeView(viewModel: HomeViewModel) {
     PullToRefreshBox(
         isRefreshing = viewModel.homeState.value.loading,
         onRefresh = {
-            viewModel.getMovie()
+            viewModel.refresh()
         },
     ) {
         Column(
@@ -63,9 +63,14 @@ fun HomeView(viewModel: HomeViewModel) {
                 .fillMaxSize()
         ) {
             Title()
-            Carousel(viewModel.homeState.value.movies)
+            Carousel(viewModel.homeState.value.popularMovies)
             TabRowHome(pagerState)
-            HomeHorizontalPager(pagerState, viewModel.homeState.value.movies)
+            HomeHorizontalPager(
+                pagerState,
+                viewModel.homeState.value.popularMovies,
+                viewModel.homeState.value.nowPlayingList,
+                viewModel.homeState.value.topRated,
+            )
         }
     }
 }

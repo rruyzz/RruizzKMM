@@ -7,4 +7,10 @@ class PopularMoviesUseCase(private val repository: HomeRepository) {
     suspend fun getPopularMovie() : List<Movie> {
         return repository.getPopularMovie()
     }
+    suspend fun getNowMovies() : List<Movie> {
+        return repository.getNowMovies()
+    }
+    suspend fun getTopRated() : List<Movie> {
+        return repository.getTopRated()
+    }
 }

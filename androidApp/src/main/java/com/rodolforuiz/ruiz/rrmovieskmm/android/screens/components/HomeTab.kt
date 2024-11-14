@@ -32,15 +32,20 @@ import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.TabItem
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.tabItems
 
 @Composable
-fun HomeHorizontalPager(pagerState: PagerState, movieList: List<Movie>) {
+fun HomeHorizontalPager(
+    pagerState: PagerState,
+    popularMovies: List<Movie>,
+    nowPlayingList: List<Movie>,
+    topRated: List<Movie>,
+) {
     HorizontalPager(
         state = pagerState,
         contentPadding = PaddingValues()
     ) { index ->
         when (tabItems[index]) {
-            is TabItem.Popular -> MoviesGrid(movieList)
-            is TabItem.TopRated -> MoviesGrid(movieList)
-            is TabItem.NowPlaying -> MoviesGrid(movieList)
+            is TabItem.Popular -> MoviesGrid(popularMovies)
+            is TabItem.TopRated -> MoviesGrid(nowPlayingList)
+            is TabItem.NowPlaying -> MoviesGrid(topRated)
         }
     }
 }

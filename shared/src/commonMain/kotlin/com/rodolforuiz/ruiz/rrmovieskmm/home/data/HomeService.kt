@@ -14,4 +14,13 @@ class HomeService(private val httpClient: HttpClient) {
         val response: PopularMoviesResponse = httpClient.get("movie/popular").body()
         return response
     }
+
+    suspend fun getNowMovies(): PopularMoviesResponse {
+        val response: PopularMoviesResponse = httpClient.get("movie/now_playing").body()
+        return response
+    }
+    suspend fun getTopRated(): PopularMoviesResponse {
+        val response: PopularMoviesResponse = httpClient.get("movie/top_rated").body()
+        return response
+    }
 }

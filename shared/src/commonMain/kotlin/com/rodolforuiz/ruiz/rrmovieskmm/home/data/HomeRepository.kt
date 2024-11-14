@@ -14,4 +14,22 @@ class HomeRepository(
             )
         } ?: listOf()
     }
+    suspend fun getNowMovies(): List<Movie> {
+        return service.getNowMovies().results?.map {
+            Movie(
+                title = it.titleMovie.orEmpty(),
+                backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
+                posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
+            )
+        } ?: listOf()
+    }
+    suspend fun getTopRated(): List<Movie> {
+        return service.getTopRated().results?.map {
+            Movie(
+                title = it.titleMovie.orEmpty(),
+                backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
+                posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
+            )
+        } ?: listOf()
+    }
 }
