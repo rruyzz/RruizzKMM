@@ -10,6 +10,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
@@ -57,6 +59,7 @@ fun TabRowHome(pagerState: PagerState) {
     }
 
     TabRow(
+
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight(),
@@ -77,14 +80,18 @@ fun TabRowHome(pagerState: PagerState) {
         },
     ) {
         tabItems.forEachIndexed { index, item ->
+            val isSelected = index == selectedTabIndex
+            val color =
+                if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.inverseSurface
             Tab(
-                selected = index == selectedTabIndex,
+                selected = isSelected,
                 onClick = {
                     selectedTabIndex = index
                 },
                 text = {
-                    Text(text = item.title)
+                    Text(text = item.title, color = color)
                 },
+                selectedContentColor = MaterialTheme.colorScheme.onError
             )
         }
     }
