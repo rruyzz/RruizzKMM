@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,40 +23,34 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
-import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
 
 
 @Composable
-fun MoviesGrid(viewModel: HomeViewModel) {
-
-    Text("Rodolfo")
-    println("RodolfoLogksfna sdafsdf")
-
-    val nowPlayingList = viewModel.homeState.value.movies
-    println("RodolfoLogksfna ${nowPlayingList.toString()}")
+fun MoviesGrid(movieList: List<Movie>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
-        modifier = Modifier.fillMaxSize().background(Color.Red),
-        contentPadding = PaddingValues(8.dp)
+        modifier = Modifier.background(Color.Transparent, RoundedCornerShape(50))
     ) {
-        items(nowPlayingList.size, key = { it }) { movie ->
-            Card(nowPlayingList[movie])
+        items(movieList.size, key = { it }) { movie ->
+            CardMovie(movieList[movie])
         }
     }
 }
 
 
 @Composable
-fun Card(movie: Movie) {
-    Box() {
+fun CardMovie(movie: Movie) {
+    Box(
+        Modifier
+            .background(Color.Red)
+            .wrapContentSize()) {
         Image(
             painter = rememberAsyncImagePainter(model = movie.posterPath),
             contentDescription = movie.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .padding(16.dp)
-                .height(150.dp)
-                .fillMaxWidth()
+                .wrapContentWidth()
+                .height(190.dp)
         )
         Text(
             text = movie.title,

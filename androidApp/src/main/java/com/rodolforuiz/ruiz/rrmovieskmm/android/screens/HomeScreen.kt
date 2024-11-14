@@ -1,30 +1,31 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.android.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.Carousel
-import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.HomeTab
-import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.HomeHorizontalPager
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.TabRowHome
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
+import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.tabItems
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -45,18 +46,27 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeView(viewModel: HomeViewModel) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
+
+    val pagerState = rememberPagerState { tabItems.size }
+
+    PullToRefreshBox(
+        isRefreshing = viewModel.homeState.value.loading,
+        onRefresh = {
+            viewModel.getMovie()
+        },
     ) {
-
-        Title()
-
-        Carousel(viewModel)
-
-        HomeTab(viewModel)
-
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Title()
+            Carousel(viewModel.homeState.value.movies)
+            TabRowHome(pagerState)
+            HomeHorizontalPager(pagerState, viewModel.homeState.value.movies)
+        }
     }
 }
 
@@ -65,38 +75,9 @@ fun HomeView(viewModel: HomeViewModel) {
 fun Title() {
     Text(
         text = "What do you want to watch?",
-        style = MaterialTheme.typography.headlineLarge,
-        modifier = Modifier.padding(16.dp, 32.dp)
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier.padding(16.dp)
     )
-}
-
-@Composable
-fun ArticleItemView(movie: Movie) {
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        AsyncImage(
-            model = movie.backdropPath,
-            contentDescription = null
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = movie.title,
-            style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 22.sp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-//        Text(text = movie.description)
-        Spacer(modifier = Modifier.height(4.dp))
-//        Text(
-//            text = movie.date,
-//            style = TextStyle(color = Color.Gray),
-//            modifier = Modifier.align(Alignment.End)
-//        )
-        Spacer(modifier = Modifier.height(4.dp))
-    }
 }
 
 @Composable
@@ -116,7 +97,7 @@ fun Loader() {
 @Composable
 fun ErrorMessage(message: String) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(Color.Red),
         contentAlignment = Alignment.Center
     ) {
         Text(

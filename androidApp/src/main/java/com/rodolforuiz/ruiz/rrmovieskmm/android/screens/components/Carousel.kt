@@ -18,20 +18,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
+import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Carousel(viewModel: HomeViewModel) {
-//        HorizontalUncontainedCarousel(
+fun Carousel(movieList: List<Movie>) {
     HorizontalMultiBrowseCarousel(
         state = rememberCarouselState {
-            viewModel.homeState.value.movies.count()
+            movieList.size
         },
-//            itemWidth = 350.dp,
         preferredItemWidth = 310.dp,
         itemSpacing = 16.dp,
-//            flingBehavior = TargetedFlingBehavior(),
         contentPadding = PaddingValues(start = 12.dp),
         modifier = Modifier
             .fillMaxWidth()
@@ -39,7 +36,7 @@ fun Carousel(viewModel: HomeViewModel) {
             .wrapContentHeight()
             .padding(top = 12.dp, bottom = 12.dp)
     ) { index ->
-        val value = viewModel.homeState.value.movies[index]
+        val value = movieList[index]
         Box() {
             Image(
                 painter = rememberAsyncImagePainter(model = value.backdropPath),
