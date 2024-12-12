@@ -12,7 +12,7 @@ class HomeRepository(
                 backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
                 posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
             )
-        } ?: listOf()
+        }?.take(18) ?: listOf()
     }
     suspend fun getNowMovies(): List<Movie> {
         return service.getNowMovies().results?.map {
@@ -21,7 +21,7 @@ class HomeRepository(
                 backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
                 posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
             )
-        } ?: listOf()
+        }?.take(18) ?: listOf()
     }
     suspend fun getTopRated(): List<Movie> {
         return service.getTopRated().results?.map {
@@ -30,6 +30,6 @@ class HomeRepository(
                 backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
                 posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
             )
-        } ?: listOf()
+        }?.take(18) ?: listOf()
     }
 }
