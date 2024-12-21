@@ -1,4 +1,4 @@
-package com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components
+package com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

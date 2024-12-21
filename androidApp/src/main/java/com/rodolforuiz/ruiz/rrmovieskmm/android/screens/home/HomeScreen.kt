@@ -1,4 +1,4 @@
-package com.rodolforuiz.ruiz.rrmovieskmm.android.screens
+package com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,9 +29,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.Carousel
-import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.HomeHorizontalPager
-import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components.TabRowHome
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.Carousel
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.HomeHorizontalPager
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.TabRowHome
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.tabItems
 import org.koin.androidx.compose.getViewModel

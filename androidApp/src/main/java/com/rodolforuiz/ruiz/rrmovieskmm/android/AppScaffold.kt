@@ -10,7 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.HomeScreen
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.HomeScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.Screens
 
 
