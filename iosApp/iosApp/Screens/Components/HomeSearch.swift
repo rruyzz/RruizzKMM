@@ -9,20 +9,26 @@ struct HomeSearch: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            HStack(spacing: 25) {
+            LazyHStack(spacing: 0) {
                 ForEach(0..<carousselMovie.count, id: \.self) { index in
-                    ZStack(alignment: .bottomLeading) {
-                        AsyncImage(url: URL(string: carousselMovie.first?.backdropPath ?? "")) { phase in
-                            if phase.image != nil {
-                                phase.image!.resizable().aspectRatio(contentMode: .fit)
-                            } else if phase.error != nil {
-                                Text("Image Load Error")
-                            } else {
-                                ProgressView()
-                            }
-                        }
-                    }
+                    CarousselImage(carousselImage: carousselMovie.first?.backdropPath ?? "")
                 }
+            }
+        }
+    }
+}
+
+struct CarousselImage: View {
+    var carousselImage: String
+    
+    var body: some View {
+        AsyncImage(url: URL(string: carousselImage)) { phase in
+            if phase.image != nil {
+                phase.image!.resizable().aspectRatio(contentMode: .fit)
+            } else if phase.error != nil {
+                Text("Image Load Error")
+            } else {
+                ProgressView()
             }
         }
     }
