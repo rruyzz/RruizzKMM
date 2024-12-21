@@ -47,13 +47,14 @@ struct HomeScreen: View {
                 ScrollView {
                     VStack(alignment: .leading) {
                         Title(title: viewModel.homeState.successState?.title ?? "")
+                        HomeSearch(carousselMovie: viewModel.homeState.successState?.popularMovies ?? [])
                     }
                 }
             }
 
         }.onAppear{
             self.viewModel.startObserving()
-        }
+        }.background(Color("ColorBackground"))
     }
 }
 

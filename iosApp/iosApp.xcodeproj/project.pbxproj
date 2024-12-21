@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		E231D64A2D164ACD00C56A41 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = E231D6492D164ACD00C56A41 /* Title.swift */; };
+		E231D64C2D166EC900C56A41 /* HomeSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E231D64B2D166EC900C56A41 /* HomeSearch.swift */; };
 		E2D666342CC89B99008C5BB4 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D666332CC89B99008C5BB4 /* HomeScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E231D6492D164ACD00C56A41 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
+		E231D64B2D166EC900C56A41 /* HomeSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearch.swift; sourceTree = "<group>"; };
 		E2D666332CC89B99008C5BB4 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				E231D6492D164ACD00C56A41 /* Title.swift */,
+				E231D64B2D166EC900C56A41 /* HomeSearch.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E231D64A2D164ACD00C56A41 /* Title.swift in Sources */,
+				E231D64C2D166EC900C56A41 /* HomeSearch.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				E2D666342CC89B99008C5BB4 /* HomeScreen.swift in Sources */,
