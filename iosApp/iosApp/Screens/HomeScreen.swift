@@ -43,14 +43,11 @@ struct HomeScreen: View {
                 ErrorMessage(message: error)
             }
 
-            if(!viewModel.homeState.popularMovies.isEmpty) {
+            if(!(viewModel.homeState.successState?.popularMovies.isEmpty == true)) {
                 ScrollView {
-                    Title(title: viewModel.homeState.title)
-//                    LazyVStack(spacing: 10) {
-//                        ForEach(viewModel.homeState.popularMovies, id: \.self) { movie in
-//                            HomeItemView(movie: movie)
-//                        }
-//                    }
+                    VStack(alignment: .leading) {
+                        Title(title: viewModel.homeState.successState?.title ?? "")
+                    }
                 }
             }
 

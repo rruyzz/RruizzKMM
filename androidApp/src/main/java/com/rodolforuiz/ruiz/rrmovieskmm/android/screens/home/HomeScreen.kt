@@ -47,7 +47,7 @@ fun HomeScreen(
     Column {
         if (homeState.value.error != null)
             ErrorMessage(homeState.value.error ?: "dsfds")
-        if (homeState.value.popularMovies.isNotEmpty())
+        if (homeState.value.successState?.popularMovies?.isNotEmpty() == true)
             HomeView(homeViewModel, onAboutButtonClick = { onAboutButtonClick() })
         if (homeState.value.loading) {
             Loader()
@@ -74,15 +74,15 @@ fun HomeView(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            Title()
+            Title(viewModel.homeState.value.successState?.title.orEmpty())
             HomeSearch(viewModel, onQueryChange = { })
-            Carousel(viewModel.homeState.value.popularMovies)
+            Carousel(viewModel.homeState.value.successState?.popularMovies.orEmpty())
             TabRowHome(pagerState)
             HomeHorizontalPager(
                 pagerState,
-                viewModel.homeState.value.popularMovies,
-                viewModel.homeState.value.nowPlayingList,
-                viewModel.homeState.value.topRated,
+                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
+                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
+                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
                 onAboutButtonClick
             )
         }
@@ -140,9 +140,9 @@ fun HomeSearch(
 }
 
 @Composable
-fun Title() {
+fun Title(title: String) {
     Text(
-        text = "What do you want to watch?",
+        text = title,
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(16.dp)
     )
