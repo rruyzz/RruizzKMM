@@ -37,15 +37,16 @@ fun HomeHorizontalPager(
     popularMovies: List<Movie>,
     nowPlayingList: List<Movie>,
     topRated: List<Movie>,
+    onAboutButtonClick: () -> Unit,
 ) {
     HorizontalPager(
         state = pagerState,
         contentPadding = PaddingValues()
     ) { index ->
         when (tabItems[index]) {
-            is TabItem.Popular -> MoviesGrid(popularMovies)
-            is TabItem.TopRated -> MoviesGrid(nowPlayingList)
-            is TabItem.NowPlaying -> MoviesGrid(topRated)
+            is TabItem.Popular -> MoviesGrid(popularMovies, onAboutButtonClick)
+            is TabItem.TopRated -> MoviesGrid(nowPlayingList, onAboutButtonClick)
+            is TabItem.NowPlaying -> MoviesGrid(topRated, onAboutButtonClick)
         }
     }
 }

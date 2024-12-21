@@ -10,31 +10,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarColors
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.isTraversalGroup
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -49,6 +39,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = getViewModel(),
+    onAboutButtonClick: () -> Unit,
 ) {
 
     val homeState = homeViewModel.homeState.collectAsState()
@@ -57,7 +48,7 @@ fun HomeScreen(
         if (homeState.value.error != null)
             ErrorMessage(homeState.value.error ?: "dsfds")
         if (homeState.value.popularMovies.isNotEmpty())
-            HomeView(homeViewModel)
+            HomeView(homeViewModel, onAboutButtonClick = { onAboutButtonClick() })
         if (homeState.value.loading) {
             Loader()
         }
@@ -66,7 +57,10 @@ fun HomeScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeView(viewModel: HomeViewModel) {
+fun HomeView(
+    viewModel: HomeViewModel,
+    onAboutButtonClick: () -> Unit,
+) {
 
     val pagerState = rememberPagerState { tabItems.size }
 
@@ -89,6 +83,7 @@ fun HomeView(viewModel: HomeViewModel) {
                 viewModel.homeState.value.popularMovies,
                 viewModel.homeState.value.nowPlayingList,
                 viewModel.homeState.value.topRated,
+                onAboutButtonClick
             )
         }
     }

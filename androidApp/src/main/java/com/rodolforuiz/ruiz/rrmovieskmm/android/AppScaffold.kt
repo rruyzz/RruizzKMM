@@ -3,6 +3,7 @@ package com.rodolforuiz.ruiz.rrmovieskmm.android
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -39,8 +40,11 @@ fun AppNavHost(
     ) {
         composable(Screens.HOME.route) {
             HomeScreen(
-//                onAboutButtonClick = { navController.navigate(Screens.ABOUT_DEVICE.route) },
+                onAboutButtonClick = { navController.navigate(Screens.DETAIL.route) },
             )
+        }
+        composable(Screens.DETAIL.route) { 
+            Text(text = "fentro")
         }
     }
 }

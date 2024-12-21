@@ -2,6 +2,7 @@ package com.rodolforuiz.ruiz.rrmovieskmm.android.screens.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,24 +27,34 @@ import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 
 
 @Composable
-fun MoviesGrid(movieList: List<Movie>) {
+fun MoviesGrid(
+    movieList: List<Movie>,
+    onAboutButtonClick: () -> Unit,
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         modifier = Modifier.background(Color.Transparent, RoundedCornerShape(50))
     ) {
         items(movieList.size, key = { it }) { movie ->
-            CardMovie(movieList[movie])
+            CardMovie(movieList[movie], onAboutButtonClick = { onAboutButtonClick() })
         }
     }
 }
 
 
 @Composable
-fun CardMovie(movie: Movie) {
+fun CardMovie(movie: Movie, onAboutButtonClick: () -> Unit) {
     Box(
         Modifier
             .background(Color.Red)
-            .wrapContentSize()) {
+            .wrapContentSize()
+            .clickable(
+                enabled = true,
+                onClick = {
+                    onAboutButtonClick()
+                }
+            ),
+        ) {
         Image(
             painter = rememberAsyncImagePainter(model = movie.posterPath),
             contentDescription = movie.title,
