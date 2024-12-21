@@ -45,11 +45,12 @@ struct HomeScreen: View {
 
             if(!viewModel.homeState.popularMovies.isEmpty) {
                 ScrollView {
-                    LazyVStack(spacing: 10) {
-                        ForEach(viewModel.homeState.popularMovies, id: \.self) { movie in
-                            HomeItemView(movie: movie)
-                        }
-                    }
+                    Title(title: viewModel.homeState.title)
+//                    LazyVStack(spacing: 10) {
+//                        ForEach(viewModel.homeState.popularMovies, id: \.self) { movie in
+//                            HomeItemView(movie: movie)
+//                        }
+//                    }
                 }
             }
 
