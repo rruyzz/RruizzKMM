@@ -43,10 +43,10 @@ struct HomeScreen: View {
                 ErrorMessage(message: error)
             }
 
-            if(!viewModel.homeState.movies.isEmpty) {
+            if(!viewModel.homeState.popularMovies.isEmpty) {
                 ScrollView {
                     LazyVStack(spacing: 10) {
-                        ForEach(viewModel.homeState.movies, id: \.self) { movie in
+                        ForEach(viewModel.homeState.popularMovies, id: \.self) { movie in
                             HomeItemView(movie: movie)
                         }
                     }
@@ -72,7 +72,7 @@ struct HomeItemView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            AsyncImage(url: URL(string: movie.image)) { phase in
+            AsyncImage(url: URL(string: movie.posterPath)) { phase in
                 if phase.image != nil {
                     phase.image!
                         .resizable()
