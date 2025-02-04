@@ -33,8 +33,6 @@ struct HomeScreen: View {
 
     var body: some View {
         VStack {
-            AppBar()
-
             if viewModel.homeState.loading {
                 Loader()
             }
