@@ -13,12 +13,11 @@ struct HomeSearch: View {
                 CarousselImage(
                     carousselImage: image.backdropPath,
                     movieTitle: image.title
-                )
+                ).clipShape(.rect(cornerRadius: 25))
             }
         }
         .tabViewStyle(PageTabViewStyle())
-        .frame(height: 250)
-        .border(Color.green)
+        .frame(height: 200)
     }
 }
 
@@ -31,28 +30,31 @@ struct CarousselImage: View {
             if image.image != nil {
                 image.image!
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
+//                    .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .clipped()
-                    .border(Color.blue)
+                    .cornerRadius(20)
+                    .overlay(
+                        alignment: .topLeading,
+                        content: {
+                            HStack {
+                                Spacer().frame(width: 20)
+                                Text(movieTitle)
+                                    .bold()
+                                    .foregroundColor(Color.white)
+                                    .padding()
+                            }
+                        }
+                    )
+//                    .border(Color.blue)
             } else if image.error != nil {
                 Text("Image Load Error")
             } else {
                 ProgressView()
             }
         }
-        .border(Color.purple)
-        .overlay(
-            alignment: .topLeading,
-            content: {
-                HStack {
-                    Spacer().frame(width: 20)
-                    Text(movieTitle)
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .padding()
-                }
-            }
-        )
+        .clipShape(.rect(cornerRadius: 25))
+
     }
 }
