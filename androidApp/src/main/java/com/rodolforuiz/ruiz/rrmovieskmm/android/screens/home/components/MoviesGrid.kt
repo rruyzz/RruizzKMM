@@ -7,16 +7,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
@@ -29,15 +32,20 @@ fun MoviesGrid(
     movieList: List<Movie>,
     onAboutButtonClick: () -> Unit,
 ) {
+    val groupList = movieList.chunked(3)
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        CardRow(movieList.subList(0, 3), onAboutButtonClick = { onAboutButtonClick() })
-        CardRow(movieList.subList(3, 6), onAboutButtonClick = { onAboutButtonClick() })
-        CardRow(movieList.subList(6, 9), onAboutButtonClick = { onAboutButtonClick() })
-        CardRow(movieList.subList(9, 12), onAboutButtonClick = { onAboutButtonClick() })
-        CardRow(movieList.subList(12, 15), onAboutButtonClick = { onAboutButtonClick() })
-        CardRow(movieList.subList(15, 18), onAboutButtonClick = { onAboutButtonClick() })
+        groupList.forEach {
+            CardRow(it, onAboutButtonClick = { onAboutButtonClick() })
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+//        CardRow(movieList.subList(0, 3), onAboutButtonClick = { onAboutButtonClick() })
+//        CardRow(movieList.subList(3, 6), onAboutButtonClick = { onAboutButtonClick() })
+//        CardRow(movieList.subList(6, 9), onAboutButtonClick = { onAboutButtonClick() })
+//        CardRow(movieList.subList(9, 12), onAboutButtonClick = { onAboutButtonClick() })
+//        CardRow(movieList.subList(12, 15), onAboutButtonClick = { onAboutButtonClick() })
+//        CardRow(movieList.subList(15, 18), onAboutButtonClick = { onAboutButtonClick() })
     }
 }
 
@@ -47,15 +55,16 @@ fun CardRow(rowList: List<Movie>, onAboutButtonClick: () -> Unit) {
         modifier = Modifier.wrapContentWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        for (i in 0..2) {
+        for (movie in rowList) {
             CardMovie(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(horizontal = 5.dp),
-                movie = rowList[i],
+                movie = movie,
                 onAboutButtonClick = { onAboutButtonClick() })
         }
+
 
     }
 
@@ -67,6 +76,8 @@ fun CardMovie(
 ) {
     Box(
         modifier = modifier
+            .clip(shape = RoundedCornerShape(8.dp))
+
             .clickable(
                 enabled = true,
                 onClick = {
