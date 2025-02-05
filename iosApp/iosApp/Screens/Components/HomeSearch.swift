@@ -1,6 +1,6 @@
 import SwiftUI
 import shared
-    
+
 struct HomeSearch: View {
     var carousselMovie: [Movie]
     
@@ -14,7 +14,7 @@ struct HomeSearch: View {
                     carousselImage: image.backdropPath,
                     movieTitle: image.title
                 )
-                .frame(height: 200) 
+                .frame(height: 200)
                 .cornerRadius(25)
                 .padding(.horizontal, 10)
             }
@@ -38,16 +38,15 @@ struct CarousselImage: View {
                     .cornerRadius(25)
                     .clipped()
                     .overlay(
-                        alignment: .topLeading,
+                        alignment: .bottomLeading,
                         content: {
                             HStack {
                                 Text(movieTitle)
-                                              .bold()
-                                              .foregroundColor(Color.white)
-                                              .padding()
-                                              .background(Color.black.opacity(0.6)) // Título legível
-                                              .cornerRadius(10)
-                                              .padding(.leading, 20)
+                                    .bold()
+                                    .foregroundColor(Color.white)
+                                    .padding()
+                                    .cornerRadius(10)
+                                    .padding(.bottom, 20)
                             }
                         }
                     )
