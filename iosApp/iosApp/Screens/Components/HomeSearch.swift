@@ -13,11 +13,14 @@ struct HomeSearch: View {
                 CarousselImage(
                     carousselImage: image.backdropPath,
                     movieTitle: image.title
-                ).clipShape(.rect(cornerRadius: 25))
+                )
+                .frame(height: 200) 
+                .cornerRadius(25)
+                .padding(.horizontal, 10)
             }
         }
         .tabViewStyle(PageTabViewStyle())
-        .frame(height: 200)
+        .frame(height: 220)
     }
 }
 
@@ -30,31 +33,29 @@ struct CarousselImage: View {
             if image.image != nil {
                 image.image!
                     .resizable()
-                    .scaledToFit()
-//                    .scaledToFill()
+                    .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .cornerRadius(25)
                     .clipped()
-                    .cornerRadius(20)
                     .overlay(
                         alignment: .topLeading,
                         content: {
                             HStack {
-                                Spacer().frame(width: 20)
                                 Text(movieTitle)
-                                    .bold()
-                                    .foregroundColor(Color.white)
-                                    .padding()
+                                              .bold()
+                                              .foregroundColor(Color.white)
+                                              .padding()
+                                              .background(Color.black.opacity(0.6)) // Título legível
+                                              .cornerRadius(10)
+                                              .padding(.leading, 20)
                             }
                         }
                     )
-//                    .border(Color.blue)
             } else if image.error != nil {
                 Text("Image Load Error")
             } else {
                 ProgressView()
             }
-        }
-        .clipShape(.rect(cornerRadius: 25))
-
+        }.padding(.horizontal, 10)
     }
 }
