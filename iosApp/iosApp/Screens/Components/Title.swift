@@ -6,11 +6,11 @@ struct Title: View {
     var title: String
     
     var body: some View {
-        HStack {
+        HStack() {
+            Spacer().frame(width: 20)
             Text(title)
                 .font(.system(size: 16, weight: .medium))
-            Spacer()
-        }.border(Color.blue)
+        }
     }
 }
 
