@@ -6,12 +6,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -38,14 +41,8 @@ fun MoviesGrid(
     ) {
         groupList.forEach {
             CardRow(it, onAboutButtonClick = { onAboutButtonClick() })
-            Spacer(modifier = Modifier.height(16.dp))
+//            Spacer(modifier = Modifier.height(16.dp))
         }
-//        CardRow(movieList.subList(0, 3), onAboutButtonClick = { onAboutButtonClick() })
-//        CardRow(movieList.subList(3, 6), onAboutButtonClick = { onAboutButtonClick() })
-//        CardRow(movieList.subList(6, 9), onAboutButtonClick = { onAboutButtonClick() })
-//        CardRow(movieList.subList(9, 12), onAboutButtonClick = { onAboutButtonClick() })
-//        CardRow(movieList.subList(12, 15), onAboutButtonClick = { onAboutButtonClick() })
-//        CardRow(movieList.subList(15, 18), onAboutButtonClick = { onAboutButtonClick() })
     }
 }
 
@@ -53,14 +50,15 @@ fun MoviesGrid(
 fun CardRow(rowList: List<Movie>, onAboutButtonClick: () -> Unit) {
     Row(
         modifier = Modifier.wrapContentWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         for (movie in rowList) {
             CardMovie(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
-                    .padding(horizontal = 5.dp),
+                    .padding(4.dp)
+                    .clip(shape = RoundedCornerShape(8.dp))
+                    .weight(1f),
                 movie = movie,
                 onAboutButtonClick = { onAboutButtonClick() })
         }
@@ -76,8 +74,6 @@ fun CardMovie(
 ) {
     Box(
         modifier = modifier
-            .clip(shape = RoundedCornerShape(8.dp))
-
             .clickable(
                 enabled = true,
                 onClick = {
@@ -90,8 +86,9 @@ fun CardMovie(
             contentDescription = movie.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .wrapContentWidth()
-                .height(190.dp)
+//                .wrapContentWidth()
+//                .fillMaxHeight(0.9f)
+                .height(200.dp)
         )
         Text(
             text = movie.title,
