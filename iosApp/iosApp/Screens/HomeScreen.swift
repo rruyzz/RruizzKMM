@@ -46,7 +46,7 @@ struct HomeScreen: View {
                     VStack(alignment: .leading) {
                         Title(title: viewModel.homeState.successState?.title ?? "")
                         HomeSearch(carousselMovie: viewModel.homeState.successState?.popularMovies ?? [])
-                        HomeHorizontalPager()
+                        HomeHorizontalPager(carousselMovie: viewModel.homeState.successState?.popularMovies ?? [])
                     }
                 }
             }
