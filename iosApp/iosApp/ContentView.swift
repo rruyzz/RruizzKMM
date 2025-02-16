@@ -9,7 +9,9 @@ struct ContentView: View {
         NavigationStack{
             homeScreen
         }.refreshable {
-//            homeScreen.viewModel.homeViewModel.getMovie()
+            homeScreen.viewModel.homeViewModel.refresh()
         }
+        .navigationViewStyle(.stack)
+
     }
 }
