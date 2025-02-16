@@ -10,9 +10,9 @@ struct HomeSuccessUi: View {
                 Title(title: content?.title ?? "")
                 HomeSearch(carousselMovie: content?.popularMovies ?? [])
                 HomeHorizontalPager(
-                    nowMovie: content?.popularMovies ?? [],
+                    nowMovie: content?.nowPlayingList ?? [],
                     popularMovie: content?.popularMovies ?? [],
-                    topMovie: content?.popularMovies ?? []
+                    topMovie: content?.topRated ?? []
                 )
             }
         }

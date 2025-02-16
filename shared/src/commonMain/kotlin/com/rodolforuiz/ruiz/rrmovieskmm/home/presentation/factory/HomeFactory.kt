@@ -11,8 +11,8 @@ class HomeFactory(private val useCase: PopularMoviesUseCase) {
         val topRated = useCase.getTopRated()
         return HomeSuccessContent(
             title = "What do you want to watch?",
-            popularMovies = nowMovies,
-            nowPlayingList = popularMovie,
+            popularMovies = popularMovie,
+            nowPlayingList = nowMovies,
             topRated = topRated,
         )
     }
