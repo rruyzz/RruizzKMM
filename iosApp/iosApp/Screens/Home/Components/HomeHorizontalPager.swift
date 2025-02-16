@@ -85,7 +85,12 @@ struct GridLayout: View {
           ScrollView {
               LazyVGrid(columns: columns, spacing: 16) {
                   ForEach(carousselMovie, id: \.self) { image in
-                      MovieCard(title: image.title, imageName: image.posterPath)
+                      NavigationLink(value: 12) {
+                          MovieCard(title: image.title, imageName: image.posterPath)
+                      }
+                      .navigationDestination(for: Int.self) { id in
+                          DetailScreen(viewModel: .init(), id: id)
+                      }
                   }
               }
               .padding(16)
