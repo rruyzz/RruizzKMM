@@ -8,16 +8,6 @@ struct ContentView: View {
         
         NavigationStack{
             homeScreen
-                .toolbar {
-                    ToolbarItem {
-                        Button {
-                        } label: {
-                            Label("Sources", systemImage: "list.bullet.rectangle")
-                                .labelStyle(.titleAndIcon)
-                        }
-                    }
-                
-                }
         }.refreshable {
 //            homeScreen.viewModel.homeViewModel.getMovie()
         }

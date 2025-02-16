@@ -4,14 +4,38 @@ import shared
 struct HomeHorizontalPager: View {
     
     let segments: [TabItem] = [TabItem.nowPlaying, TabItem.popular, TabItem.topRated]
-    var carousselMovie: [Movie]
+    @State var carousselMovie: [Movie] = []
+    var nowMovie: [Movie]
+    var popularMovie: [Movie]
+    var topMovie: [Movie]
     @State private var currentSegment = TabItem.nowPlaying
 
+    init(nowMovie: [Movie], popularMovie: [Movie], topMovie: [Movie]) {
+        self.nowMovie = nowMovie
+        self.popularMovie = popularMovie
+        self.topMovie = topMovie
+//        _currentSegment = State(initialValue: .nowPlaying) // Inicializa o segmento atual
+        _carousselMovie = State(initialValue: nowMovie) // Inicializa o carousselMovie com nowMovie
+    }
+    
     var body: some View {
         VStack {
             SegmentedView(segments: segments, selected: $currentSegment)
             Spacer()
-            GridLayout(carousselMovie: carousselMovie)
+            GridLayout(carousselMovie: $carousselMovie)
+        }
+        .onChange(of: currentSegment) { newSegment in
+            switch newSegment {
+            case .nowPlaying:
+                carousselMovie = nowMovie
+            case .popular:
+                carousselMovie = popularMovie
+            case .topRated:
+                carousselMovie = topMovie
+            }
+        }
+        .onAppear {
+            carousselMovie = carousselMovie
         }
     }
 }
@@ -55,7 +79,7 @@ struct GridLayout: View {
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
-    var carousselMovie: [Movie]
+    @Binding var carousselMovie: [Movie]
     
     var body: some View {
           ScrollView {

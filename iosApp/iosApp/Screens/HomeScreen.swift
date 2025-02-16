@@ -1,7 +1,6 @@
 import SwiftUI
 import shared
 
-
 extension HomeScreen {
     
     @MainActor
@@ -41,14 +40,8 @@ struct HomeScreen: View {
                 ErrorMessage(message: error)
             }
 
-            if(!(viewModel.homeState.successState?.popularMovies.isEmpty == true)) {
-                ScrollView {
-                    VStack(alignment: .leading) {
-                        Title(title: viewModel.homeState.successState?.title ?? "")
-                        HomeSearch(carousselMovie: viewModel.homeState.successState?.popularMovies ?? [])
-                        HomeHorizontalPager(carousselMovie: viewModel.homeState.successState?.popularMovies ?? [])
-                    }
-                }
+            if(viewModel.homeState.successState != nil) {
+                HomeSuccessUi(content: viewModel.homeState.successState)
             }
 
         }.onAppear{
