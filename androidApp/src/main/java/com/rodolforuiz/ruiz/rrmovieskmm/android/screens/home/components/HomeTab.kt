@@ -45,8 +45,8 @@ fun HomeHorizontalPager(
     ) { index ->
         when (tabItems[index]) {
             is TabItem.Popular -> MoviesGrid(popularMovies, onAboutButtonClick)
-            is TabItem.TopRated -> MoviesGrid(nowPlayingList, onAboutButtonClick)
-            is TabItem.NowPlaying -> MoviesGrid(topRated, onAboutButtonClick)
+            is TabItem.TopRated -> MoviesGrid(topRated, onAboutButtonClick)
+            is TabItem.NowPlaying -> MoviesGrid(nowPlayingList, onAboutButtonClick)
         }
     }
 }
