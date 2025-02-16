@@ -84,8 +84,8 @@ fun HomeView(
             HomeHorizontalPager(
                 pagerState,
                 viewModel.homeState.value.successState?.popularMovies.orEmpty(),
-                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
-                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
+                viewModel.homeState.value.successState?.nowPlayingList.orEmpty(),
+                viewModel.homeState.value.successState?.topRated.orEmpty(),
                 onAboutButtonClick
             )
         }
