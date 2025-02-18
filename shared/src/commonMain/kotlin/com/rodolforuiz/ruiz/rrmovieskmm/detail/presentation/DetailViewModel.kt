@@ -20,6 +20,7 @@ class DetailViewModel: BaseViewModel() {
         try {
             _detailState.emit(DetailState(loading = true))
             val content = DetailContent(
+                isSaved = true,
                 title = "Batman",
                 backgroundPoster = "Batman",
                 poster = "Batman",

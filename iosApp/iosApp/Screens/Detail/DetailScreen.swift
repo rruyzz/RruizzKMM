@@ -40,7 +40,7 @@ struct DetailScreen: View {
             }
 
             if(viewModel.detailState.successState != nil) {
-                Text(viewModel.detailState.successState?.gender ?? "RODOLFO")
+                DetailSuccessUi(content: viewModel.detailState.successState)
             }
 
         }.onAppear{
