@@ -5,7 +5,9 @@ struct CustomToolbar: View {
     var backAction: () -> Void
     var saveAction: () -> Void
     @State var isSaved: Bool
-    
+    var icon: String {
+        isSaved ? "heart.fill" : "heart"
+    }
     var body: some View {
         HStack {
             Button(action: backAction) {
@@ -20,7 +22,7 @@ struct CustomToolbar: View {
 
             Spacer()
             Button(action: saveAction) {
-                Image(systemName: "heart")
+                Image(systemName: icon)
                     .font(.title2)
                     .foregroundColor(.white)
             }

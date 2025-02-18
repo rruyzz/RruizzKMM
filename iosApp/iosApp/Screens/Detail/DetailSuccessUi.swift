@@ -13,7 +13,7 @@ struct DetailSuccessUi: View {
                     title: "Descrição",
                     backAction: { dismiss() },
                     saveAction: { print("Salvar pressionado") },
-                    isSaved: false
+                    isSaved: content?.isSaved ?? false
                 )
                 .padding(.vertical)
             }
