@@ -22,9 +22,9 @@ class DetailViewModel: BaseViewModel() {
             val content = DetailContent(
                 isSaved = true,
                 title = "Batman",
-                backgroundPoster = "Batman",
-                poster = "Batman",
-                grade = "Batman",
+                poster = "https://image.tmdb.org/t/p/w500/xSnM4ahmz692msbMTBsfBWHvR3M.jpg",
+                backgroundPoster = "https://image.tmdb.org/t/p/w500/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg",
+                grade = "9.8",
                 year = "Batman",
                 minute = "Batman",
                 gender = "Batman",

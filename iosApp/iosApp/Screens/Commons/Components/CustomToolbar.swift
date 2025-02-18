@@ -28,6 +28,6 @@ struct CustomToolbar: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(.horizontal)
+        .padding()
     }
 }

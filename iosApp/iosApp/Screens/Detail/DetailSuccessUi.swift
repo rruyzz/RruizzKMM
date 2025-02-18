@@ -15,7 +15,10 @@ struct DetailSuccessUi: View {
                     saveAction: { print("Salvar pressionado") },
                     isSaved: content?.isSaved ?? false
                 )
-                .padding(.vertical)
+                BackgroundPoster(
+                    title: content?.grade ?? "",
+                    imageName: content?.backgroundPoster ?? ""
+                )
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
