@@ -21,10 +21,20 @@ struct DetailSuccessUi: View {
                     backgroundPoster: content?.backgroundPoster ?? "",
                     poster: content?.poster ?? ""
                 )
-                InfosView(
-                    year: "2020",
-                    minutes: "156 minutes"
-                )
+                VStack {
+                    InfosView(
+                        year: "2020",
+                        minutes: "156 minutes"
+                    )
+                    Text("Descrição")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.headline)
+                        .padding()
+                    Text(content?.description ?? "")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.subheadline)
+                        .padding()
+                }
                 .offset(x: 0, y: 75)
             }
         }
