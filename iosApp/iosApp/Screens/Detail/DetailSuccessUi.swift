@@ -16,8 +16,10 @@ struct DetailSuccessUi: View {
                     isSaved: content?.isSaved ?? false
                 )
                 BackgroundPoster(
-                    title: content?.grade ?? "",
-                    imageName: content?.backgroundPoster ?? ""
+                    grade: content?.grade ?? "",
+                    title: content?.title ?? "",
+                    backgroundPoster: content?.backgroundPoster ?? "",
+                    poster: content?.poster ?? ""
                 )
             }
         }

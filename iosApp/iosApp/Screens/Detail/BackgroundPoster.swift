@@ -1,32 +1,22 @@
 import SwiftUI
 
 struct BackgroundPoster: View {
+    var grade: String
     var title: String
-    var imageName: String
+    var backgroundPoster: String
+    var poster: String
     
     var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: imageName)) { image in
+        ZStack {
+            AsyncImage(url: URL(string: backgroundPoster)) { image in
                 if image.image != nil {
                     image.image!
                         .resizable()
                         .scaledToFill()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .overlay(
                             alignment: .bottomTrailing,
                             content: {
-                                HStack {
-                                    Text(title)
-                                        .bold()
-                                        .padding(.leading, 8)
-                                    Image(systemName: "star")
-                                        .font(.title2)
-                                        .foregroundColor(.white)
-                                        .padding(.trailing, 8)
-                                }
-                                .background(Color.gray)
-                                .cornerRadius(4)
-                                .padding(8)
+                                Grade(grade: grade)
                             }
                         )
                 } else if image.error != nil {
@@ -35,8 +25,34 @@ struct BackgroundPoster: View {
 //                    ProgressView()
                 }
             }
+            PosterTitle(
+                title: title,
+                imageName: poster
+            )
+            .offset(x: 0, y: 75) 
         }
     }
+}
+
+struct Grade: View {
+    var grade: String
+    
+    var body: some View {
+        HStack {
+            Text(grade)
+                .bold()
+                .padding(.leading, 8)
+            Image(systemName: "star")
+                .font(.title2)
+                .foregroundColor(.white)
+                .padding(.trailing, 8)
+        }
+        .background(Color.gray)
+        .cornerRadius(4)
+        .padding(8)
+        
+    }
+    
 }
 
 //#Preview {
