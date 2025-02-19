@@ -21,6 +21,11 @@ struct DetailSuccessUi: View {
                     backgroundPoster: content?.backgroundPoster ?? "",
                     poster: content?.poster ?? ""
                 )
+                InfosView(
+                    year: "2020",
+                    minutes: "156 minutes"
+                )
+                .offset(x: 0, y: 75)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

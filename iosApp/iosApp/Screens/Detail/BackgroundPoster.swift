@@ -17,6 +17,7 @@ struct BackgroundPoster: View {
                             alignment: .bottomTrailing,
                             content: {
                                 Grade(grade: grade)
+                                    .padding(.trailing, 40)
                             }
                         )
                 } else if image.error != nil {
@@ -45,14 +46,10 @@ struct Grade: View {
             Image(systemName: "star")
                 .font(.title2)
                 .foregroundColor(.white)
-                .padding(.trailing, 8)
         }
         .background(Color.gray)
         .cornerRadius(4)
-        .padding(8)
-        
     }
-    
 }
 
 //#Preview {
