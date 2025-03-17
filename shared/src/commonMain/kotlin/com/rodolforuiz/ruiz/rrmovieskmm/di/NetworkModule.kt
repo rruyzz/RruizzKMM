@@ -24,8 +24,7 @@ val networkModule = module {
                 })
             }
             install(Logging) {
-                logger = Logger.SIMPLE
-                level = LogLevel.ALL
+                level = LogLevel.BODY
                 logger = object : Logger {
                     override fun log(message: String) {
                         KermitLog.withTag(tag = "KtorClient").i {
