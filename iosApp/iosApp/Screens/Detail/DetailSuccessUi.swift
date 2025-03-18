@@ -23,8 +23,8 @@ struct DetailSuccessUi: View {
                 )
                 VStack {
                     InfosView(
-                        year: "2020",
-                        minutes: "156 minutes"
+                        year: content?.year ?? "djksfj",
+                        minutes: content?.minute ?? "dsff"
                     )
                     Text("Descrição")
                         .frame(maxWidth: .infinity, alignment: .leading)
