@@ -128,16 +128,27 @@ fun DetailView(viewModel: DetailViewModel, detailContent: DetailContent?) {
                             grade = detailContent?.grade ?: "",
                             modifier = Modifier.align(Alignment.BottomEnd)
                         )
-                        Image(
-                            painter = rememberAsyncImagePainter(model = detailContent?.poster),
-                            contentDescription = detailContent?.description,
-                            contentScale = ContentScale.Crop,
+                        Row(
                             modifier = Modifier
                                 .align(Alignment.BottomStart)
                                 .padding(8.dp)
                                 .offset(y = 70.dp)
-                                .height(140.dp)
-                        )
+                        ) {
+                            Image(
+                                painter = rememberAsyncImagePainter(model = detailContent?.poster),
+                                contentDescription = detailContent?.description,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .height(140.dp)
+                            )
+                            Text(
+                                text = detailContent?.title ?: "sd;lksamd",
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .offset(y = 24.dp)
+                                    .padding(8.dp)
+                            )
+                        }
                     }
                 }
             }
