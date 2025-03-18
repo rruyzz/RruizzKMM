@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.HomeScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.Screens
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.DetailScreen
 
 
 @Composable
@@ -43,8 +44,8 @@ fun AppNavHost(
                 onAboutButtonClick = { navController.navigate(Screens.DETAIL.route) },
             )
         }
-        composable(Screens.DETAIL.route) { 
-            Text(text = "fentro")
+        composable(Screens.DETAIL.route) {
+            DetailScreen()
         }
     }
 }
