@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
@@ -25,6 +27,7 @@ import com.rodolforuiz.ruiz.rrmovieskmm.detail.presentation.model.DetailContent
 import org.koin.androidx.compose.getViewModel
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -84,34 +87,48 @@ fun DetailView(viewModel: DetailViewModel, detailContent: DetailContent?) {
                     }
                 ) {
                     Column {
-                        Box {
-                            Image(
-                                painter = rememberAsyncImagePainter(model = detailContent?.backgroundPoster),
-                                contentDescription = detailContent?.title,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .height(200.dp)
-                                    .fillMaxWidth()
-                            )
-                            Grade(
-                                grade = detailContent?.grade ?: "",
-                                modifier = Modifier.align(Alignment.BottomEnd)
-                            )
-                            Poster(
-                                modifier = Modifier
-                                    .align(Alignment.BottomStart)
-                                    .padding(8.dp)
-                                    .offset(y = 70.dp),
-                                detailContent = detailContent
-                            )
-                        }
+                        Header(detailContent = detailContent)
                         Spacer(modifier = Modifier.height(70.dp))
                         Info(detailContent = detailContent)
+                        Text(
+                            text = "Descrição",
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                        Text(
+                            text = detailContent.toString(),
+                            modifier = Modifier.padding(16.dp)
+                        )
                     }
                 }
             }
         }
     )
+}
+
+@Composable
+fun Header(detailContent: DetailContent?) {
+    Box {
+        Image(
+            painter = rememberAsyncImagePainter(model = detailContent?.backgroundPoster),
+            contentDescription = detailContent?.title,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .height(200.dp)
+                .fillMaxWidth()
+        )
+        Grade(
+            grade = detailContent?.grade ?: "",
+            modifier = Modifier.align(Alignment.BottomEnd)
+        )
+        Poster(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(8.dp)
+                .offset(y = 70.dp),
+            detailContent = detailContent
+        )
+    }
 }
 
 @Preview
