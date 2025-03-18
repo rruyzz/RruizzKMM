@@ -25,8 +25,8 @@ class DetailViewModel: BaseViewModel() {
                 poster = "https://image.tmdb.org/t/p/w500/xSnM4ahmz692msbMTBsfBWHvR3M.jpg",
                 backgroundPoster = "https://image.tmdb.org/t/p/w500/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg",
                 grade = "9.8",
-                year = "Batman",
-                minute = "Batman",
+                year = "2020",
+                minute = "156 minutes",
                 gender = "Batman",
                 description = "Batman",
             )
