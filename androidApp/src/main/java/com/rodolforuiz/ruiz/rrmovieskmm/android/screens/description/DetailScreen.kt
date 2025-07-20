@@ -47,7 +47,7 @@ fun DetailScreen(
     val homeState = detailViewModel.detailState.collectAsState()
 
     LaunchedEffect(movie) {
-        detailViewModel.loadMovie(movie)
+        detailViewModel.loadMovie(movie = movie)
     }
     Column {
         if (homeState.value.error != null)
