@@ -1,6 +1,7 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +23,10 @@ import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Carousel(movieList: List<Movie>) {
+fun Carousel(
+    movieList: List<Movie>,
+    onAboutButtonClick: () -> Unit,
+) {
     HorizontalMultiBrowseCarousel(
         state = rememberCarouselState {
             movieList.size
@@ -37,7 +41,9 @@ fun Carousel(movieList: List<Movie>) {
             .padding(top = 12.dp, bottom = 12.dp)
     ) { index ->
         val value = movieList[index]
-        Box() {
+        Box(
+            modifier = Modifier.clickable { onAboutButtonClick() }
+        ) {
             Image(
                 painter = rememberAsyncImagePainter(model = value.backdropPath),
                 contentDescription = value.title,
