@@ -36,14 +36,19 @@ import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.G
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Info
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Poster
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Toolbar
+import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 import kotlinx.coroutines.launch
 
 @Composable
 fun DetailScreen(
+    movie: Movie,
     detailViewModel: DetailViewModel = getViewModel(),
 ) {
     val homeState = detailViewModel.detailState.collectAsState()
 
+    LaunchedEffect(movie) {
+        detailViewModel.loadMovie(movie)
+    }
     Column {
         if (homeState.value.error != null)
             ErrorMessage(homeState.value.error ?: "dsfds")

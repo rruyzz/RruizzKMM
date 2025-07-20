@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.Carousel
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.HomeHorizontalPager
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.TabRowHome
+import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.HomeViewModel
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.tabItems
 import org.koin.androidx.compose.getViewModel
@@ -41,7 +42,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = getViewModel(),
-    onAboutButtonClick: () -> Unit,
+    onAboutButtonClick: (Movie) -> Unit,
 ) {
 
     val homeState = homeViewModel.homeState.collectAsState()
@@ -50,7 +51,7 @@ fun HomeScreen(
         if (homeState.value.error != null)
             ErrorMessage(homeState.value.error ?: "dsfds")
         if (homeState.value.successState?.popularMovies?.isNotEmpty() == true)
-            HomeView(homeViewModel, onAboutButtonClick = { onAboutButtonClick() })
+            HomeView(homeViewModel, onAboutButtonClick = { onAboutButtonClick(it) })
         if (homeState.value.loading) {
             Loader()
         }
@@ -61,7 +62,7 @@ fun HomeScreen(
 @Composable
 fun HomeView(
     viewModel: HomeViewModel,
-    onAboutButtonClick: () -> Unit,
+    onAboutButtonClick: (Movie) -> Unit,
 ) {
 
     val pagerState = rememberPagerState { tabItems.size }
@@ -81,7 +82,9 @@ fun HomeView(
             HomeSearch(viewModel, onQueryChange = { })
             Carousel(
                 viewModel.homeState.value.successState?.popularMovies.orEmpty(),
-                onAboutButtonClick
+                onAboutButtonClick = {
+                    onAboutButtonClick(it)
+                }
             )
             TabRowHome(pagerState)
             HomeHorizontalPager(
@@ -89,7 +92,9 @@ fun HomeView(
                 viewModel.homeState.value.successState?.popularMovies.orEmpty(),
                 viewModel.homeState.value.successState?.nowPlayingList.orEmpty(),
                 viewModel.homeState.value.successState?.topRated.orEmpty(),
-                onAboutButtonClick
+                onAboutButtonClick = {
+                    onAboutButtonClick(it)
+                }
             )
         }
     }

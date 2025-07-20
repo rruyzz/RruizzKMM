@@ -1,20 +1,15 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -33,21 +28,28 @@ import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 @Composable
 fun MoviesGrid(
     movieList: List<Movie>,
-    onAboutButtonClick: () -> Unit,
+    onAboutButtonClick: (Movie) -> Unit,
 ) {
     val groupList = movieList.chunked(3)
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
         groupList.forEach {
-            CardRow(it, onAboutButtonClick = { onAboutButtonClick() })
-//            Spacer(modifier = Modifier.height(16.dp))
+            CardRow(
+                rowList = it,
+                onAboutButtonClick = { movie ->
+                    onAboutButtonClick(movie)
+                }
+            )
         }
     }
 }
 
 @Composable
-fun CardRow(rowList: List<Movie>, onAboutButtonClick: () -> Unit) {
+fun CardRow(
+    rowList: List<Movie>,
+    onAboutButtonClick: (Movie) -> Unit,
+) {
     Row(
         modifier = Modifier.wrapContentWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
@@ -60,7 +62,7 @@ fun CardRow(rowList: List<Movie>, onAboutButtonClick: () -> Unit) {
                     .clip(shape = RoundedCornerShape(8.dp))
                     .weight(1f),
                 movie = movie,
-                onAboutButtonClick = { onAboutButtonClick() })
+                onAboutButtonClick = { onAboutButtonClick(movie) })
         }
 
 

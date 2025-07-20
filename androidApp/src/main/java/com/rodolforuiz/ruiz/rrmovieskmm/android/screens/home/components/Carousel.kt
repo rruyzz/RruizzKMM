@@ -25,7 +25,7 @@ import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 @Composable
 fun Carousel(
     movieList: List<Movie>,
-    onAboutButtonClick: () -> Unit,
+    onAboutButtonClick: (Movie) -> Unit,
 ) {
     HorizontalMultiBrowseCarousel(
         state = rememberCarouselState {
@@ -40,13 +40,13 @@ fun Carousel(
             .wrapContentHeight()
             .padding(top = 12.dp, bottom = 12.dp)
     ) { index ->
-        val value = movieList[index]
+        val movie = movieList[index]
         Box(
-            modifier = Modifier.clickable { onAboutButtonClick() }
+            modifier = Modifier.clickable { onAboutButtonClick(movie) }
         ) {
             Image(
-                painter = rememberAsyncImagePainter(model = value.backdropPath),
-                contentDescription = value.title,
+                painter = rememberAsyncImagePainter(model = movie.backdropPath),
+                contentDescription = movie.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .height(200.dp)
@@ -54,7 +54,7 @@ fun Carousel(
                     .maskClip(shape = MaterialTheme.shapes.extraLarge)
             )
             Text(
-                text = value.title,
+                text = movie.title,
                 style = MaterialTheme.typography.labelMedium,
                 modifier = Modifier
                     .align(Alignment.BottomStart)
