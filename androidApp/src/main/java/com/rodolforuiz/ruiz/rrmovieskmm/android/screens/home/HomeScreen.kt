@@ -79,7 +79,10 @@ fun HomeView(
         ) {
             Title(viewModel.homeState.value.successState?.title.orEmpty())
             HomeSearch(viewModel, onQueryChange = { })
-            Carousel(viewModel.homeState.value.successState?.popularMovies.orEmpty())
+            Carousel(
+                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
+                onAboutButtonClick
+            )
             TabRowHome(pagerState)
             HomeHorizontalPager(
                 pagerState,
