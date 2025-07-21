@@ -38,17 +38,15 @@ import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.P
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Toolbar
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 import kotlinx.coroutines.launch
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun DetailScreen(
-    movie: Movie,
-    detailViewModel: DetailViewModel = getViewModel(),
+    movie: Movie
 ) {
+    val detailViewModel: DetailViewModel = getViewModel(parameters = { parametersOf(movie) })
     val homeState = detailViewModel.detailState.collectAsState()
 
-    LaunchedEffect(movie) {
-        detailViewModel.loadMovie(movie = movie)
-    }
     Column {
         if (homeState.value.error != null)
             ErrorMessage(homeState.value.error ?: "dsfds")
@@ -60,7 +58,6 @@ fun DetailScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailView(viewModel: DetailViewModel, detailContent: DetailContent?) {
 
