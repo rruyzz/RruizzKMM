@@ -46,6 +46,7 @@ kotlin {
                 implementation(libs.ktor.serialization.kotlinx.json)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.koin.core)
+                implementation(libs.androidx.lifecycle.viewmodel.compose.ktx)
                 implementation(libs.sql.coroutines.extensions)
                 implementation( libs.ktor.client.logging)
                 implementation(libs.kermit)
