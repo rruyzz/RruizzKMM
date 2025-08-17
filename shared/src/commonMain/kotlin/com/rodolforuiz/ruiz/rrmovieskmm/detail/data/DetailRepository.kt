@@ -6,7 +6,14 @@ class DetailRepository(
     private val service: DetailService
 ) {
     suspend fun getPopularMovie(movieId: String): DetailModel {
-        return service.getDetails(movieId).toDomain()
+        return try {
+            val r = service.getDetails(movieId)
+            println("Rodolfeira ${r}")
+            r.toDomain()
+        } catch (e: Exception) {
+            println("Rodolfeira ${e}")
+            DetailMovieResponse().toDomain()
+        }
     }
 
     private fun DetailMovieResponse.toDomain() = DetailModel(
