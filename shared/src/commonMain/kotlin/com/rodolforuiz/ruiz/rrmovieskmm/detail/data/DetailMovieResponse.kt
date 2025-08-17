@@ -7,13 +7,13 @@ import kotlinx.serialization.Serializable
 data class DetailMovieResponse(
     @SerialName("isSaved") val isSaved: Boolean? = true,
     @SerialName("title") val title: String? = null,
-    @SerialName("backdrop_path") val backdropPath: String? = null,
-    @SerialName("poster_path") val posterPath: String? = null,
-    @SerialName("vote_average") val voteAverage: Double? = 0.0,
-    @SerialName("release_date") val releaseDate: String? = null,
-    @SerialName("runtime") val runtime: Int? = 0,
-    @SerialName("genres") val genres: List<Genre>? = null,
-    @SerialName("overview") val overview: String? = null,
+    @SerialName("backgroundPoster") val backgroundPoster: String? = null,
+    @SerialName("poster") val poster: String? = null,
+    @SerialName("grade") val grade: Double? = 0.0,
+    @SerialName("year") val year: String? = null,
+    @SerialName("minute") val minute: Int? = 0,
+    @SerialName("gender") val gender: String? = null,
+    @SerialName("description") val description: String? = null,
 )
 
 @Serializable

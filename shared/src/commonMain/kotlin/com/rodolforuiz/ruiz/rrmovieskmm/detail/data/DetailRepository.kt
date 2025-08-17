@@ -19,12 +19,12 @@ class DetailRepository(
     private fun DetailMovieResponse.toDomain() = DetailModel(
         isSaved = false,
         title = this.title.orEmpty(),
-        backgroundPoster = "https://image.tmdb.org/t/p/w500${this.backdropPath.orEmpty()}",
-        poster = "https://image.tmdb.org/t/p/w500${this.posterPath.orEmpty()}",
-        grade = this.voteAverage.toString(),
-        year = this.releaseDate.orEmpty(),
-        minute = this.runtime.toString(),
-        gender = this.genres?.firstOrNull().toString(),
-        description = this.overview.orEmpty()
+        backgroundPoster = this.backgroundPoster.orEmpty(),
+        poster = this.poster.orEmpty(),
+        grade = this.grade.toString(),
+        year = this.year.orEmpty(),
+        minute = this.minute.toString(),
+        gender = this.gender.toString(),
+        description = this.description.orEmpty()
     )
 }
