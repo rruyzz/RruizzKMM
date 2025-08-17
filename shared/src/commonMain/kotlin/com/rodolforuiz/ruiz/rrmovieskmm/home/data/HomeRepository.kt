@@ -11,6 +11,7 @@ class HomeRepository(
                 title = it.titleMovie.orEmpty(),
                 backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
                 posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
+                id = it.id.toString()
             )
         }?.take(18) ?: listOf()
     }
@@ -20,6 +21,7 @@ class HomeRepository(
                 title = it.titleMovie.orEmpty(),
                 backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
                 posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
+                id = it.id.toString()
             )
         }?.take(18) ?: listOf()
     }
@@ -29,6 +31,7 @@ class HomeRepository(
                 title = it.titleMovie.orEmpty(),
                 backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
                 posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
+                id = it.id.toString()
             )
         }?.take(18) ?: listOf()
     }

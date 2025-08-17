@@ -36,12 +36,15 @@ import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.G
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Info
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Poster
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Toolbar
+import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 import kotlinx.coroutines.launch
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun DetailScreen(
-    detailViewModel: DetailViewModel = getViewModel(),
+    movie: Movie
 ) {
+    val detailViewModel: DetailViewModel = getViewModel(parameters = { parametersOf(movie) })
     val homeState = detailViewModel.detailState.collectAsState()
 
     Column {
@@ -55,7 +58,6 @@ fun DetailScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailView(viewModel: DetailViewModel, detailContent: DetailContent?) {
 
