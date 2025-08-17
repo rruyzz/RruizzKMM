@@ -49,6 +49,7 @@ fun HomeScreen(
 
     Column {
         if (homeState.value.error != null)
+            println("Rodolfeira ${homeState.value.error} ")
             ErrorMessage(homeState.value.error ?: "dsfds")
         if (homeState.value.successState?.popularMovies?.isNotEmpty() == true)
             HomeView(homeViewModel, onAboutButtonClick = { onAboutButtonClick(it) })

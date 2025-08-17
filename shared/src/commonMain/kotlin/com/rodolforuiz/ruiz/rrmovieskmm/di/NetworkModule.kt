@@ -35,9 +35,10 @@ val networkModule = module {
             }
             defaultRequest {
                 url {
-                    url("https://api.themoviedb.org/3/")
-                    parameters.append("api_key", "e591023d8d396231d3045ea6341a6fd2")
-                    parameters.append("language", "pt-BR")
+                    url("http://192.168.15.9:8081")
+//                    url("https://api.themoviedb.org/3/")
+//                    parameters.append("api_key", "e591023d8d396231d3045ea6341a6fd2")
+//                    parameters.append("language", "pt-BR")
                 }
             }
         }
