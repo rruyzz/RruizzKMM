@@ -6,33 +6,51 @@ class HomeRepository(
     private val service: HomeService
 ) {
     suspend fun getPopularMovie(): List<Movie> {
-        return service.getPopularMovies().results?.map {
-            Movie(
-                title = it.titleMovie.orEmpty(),
-                backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
-                posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
-                id = it.id.toString()
-            )
-        }?.take(18) ?: listOf()
+        return try {
+            service.getPopularMovies().map {
+                Movie(
+                    title = it.titleMovie.orEmpty(),
+                    backdropPath = it.backdropPath.orEmpty(),
+                    posterPath = it.posterPath.orEmpty(),
+                    id = it.id.toString()
+                )
+            }.take(18) ?: listOf()
+        } catch (e: Exception) {
+            println("Rodolfeira excepetion getPopularMovie ${e}")
+            listOf()
+        }
     }
+
     suspend fun getNowMovies(): List<Movie> {
-        return service.getNowMovies().results?.map {
-            Movie(
-                title = it.titleMovie.orEmpty(),
-                backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
-                posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
-                id = it.id.toString()
-            )
-        }?.take(18) ?: listOf()
+        return try {
+            service.getNowMovies().map {
+                Movie(
+                    title = it.titleMovie.orEmpty(),
+                    backdropPath = it.backdropPath.orEmpty(),
+                    posterPath = it.posterPath.orEmpty(),
+                    id = it.id.toString()
+                )
+            }.take(18) ?: listOf()
+        } catch (e: Exception) {
+            println("Rodolfeira excepetion getNowMovies ${e}")
+            listOf()
+        }
     }
+
     suspend fun getTopRated(): List<Movie> {
-        return service.getTopRated().results?.map {
-            Movie(
-                title = it.titleMovie.orEmpty(),
-                backdropPath = "https://image.tmdb.org/t/p/w500${it.backdropPath.orEmpty()}",
-                posterPath = "https://image.tmdb.org/t/p/w500${it.posterPath.orEmpty()}",
-                id = it.id.toString()
-            )
-        }?.take(18) ?: listOf()
+        return try {
+            service.getTopRated().map {
+                Movie(
+                    title = it.titleMovie.orEmpty(),
+                    backdropPath = it.backdropPath.orEmpty(),
+                    posterPath = it.posterPath.orEmpty(),
+                    id = it.id.toString()
+                )
+
+            }.take(18) ?: listOf()
+        } catch (e: Exception) {
+            println("Rodolfeira excepetion getTopRated ${e}")
+            listOf()
+        }
     }
 }
