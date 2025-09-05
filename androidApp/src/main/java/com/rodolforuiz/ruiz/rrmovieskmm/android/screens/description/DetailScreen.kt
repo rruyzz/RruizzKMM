@@ -14,7 +14,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -29,7 +28,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.Grade
@@ -39,6 +37,13 @@ import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.components.T
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 import kotlinx.coroutines.launch
 import org.koin.core.parameter.parametersOf
+import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DetailScreen(
@@ -51,7 +56,7 @@ fun DetailScreen(
         if (homeState.value.error != null)
             ErrorMessage(homeState.value.error ?: "dsfds")
         if (homeState.value.successState != null)
-            DetailView(detailViewModel, homeState.value.successState)
+            DetailView(homeState.value.successState)
         if (homeState.value.loading) {
             Loader()
         }
@@ -59,7 +64,7 @@ fun DetailScreen(
 }
 
 @Composable
-fun DetailView(viewModel: DetailViewModel, detailContent: DetailContent?) {
+fun DetailView(detailContent: DetailContent?) {
 
     var isRefreshing by remember { mutableStateOf(false) }
 
@@ -98,9 +103,10 @@ fun DetailView(viewModel: DetailViewModel, detailContent: DetailContent?) {
                             modifier = Modifier.padding(16.dp)
                         )
                         Text(
-                            text = detailContent.toString(),
-                            modifier = Modifier.padding(16.dp)
-                        )
+                            text = detailContent?.description.toString(),
+                            modifier = Modifier.padding(16.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            )
                     }
                 }
             }
@@ -122,6 +128,8 @@ fun Header(detailContent: DetailContent?) {
         Grade(
             grade = detailContent?.grade ?: "",
             modifier = Modifier.align(Alignment.BottomEnd)
+
+
         )
         Poster(
             modifier = Modifier
@@ -133,11 +141,15 @@ fun Header(detailContent: DetailContent?) {
     }
 }
 
-@Preview
+@Preview(
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+
+)
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun DetailPreview() {
     DetailView(
-        viewModel = viewModel(),
         detailContent = DetailContent(
             isSaved = true,
             title = "Batman",
