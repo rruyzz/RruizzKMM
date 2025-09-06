@@ -17,6 +17,7 @@ kotlinxDatetime = "0.4.1"
 koin = "3.4.3"
 sqlDelight = "2.0.0"
 accompanistSwiperefresh = "0.24.13-rc"
+splash = "1.0.1"
 
 [libraries]
 
@@ -52,6 +53,7 @@ sql-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extension
 sql-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sql-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 
+splash = { module = "androidx.core:core-splashscreen", version.ref = "splash" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
