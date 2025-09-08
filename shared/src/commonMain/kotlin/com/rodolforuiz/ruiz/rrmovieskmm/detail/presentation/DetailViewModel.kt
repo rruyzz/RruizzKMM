@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(
     private val detailUseCase: GetDetailUseCase,
-    private val movie: Movie
+    private val movieId: String
 ): BaseViewModel() {
     private val _detailState: MutableStateFlow<DetailState> =
         MutableStateFlow(DetailState(loading = true))
@@ -24,7 +24,7 @@ class DetailViewModel(
     fun loadMovie() = scope.launch {
         try {
             _detailState.emit(DetailState(loading = true))
-            val detailContent = detailUseCase.getDetailsMovies(movieId = movie.id)
+            val detailContent = detailUseCase.getDetailsMovies(movieId = movieId)
             _detailState.emit(
                 DetailState(successState = detailContent)
             )

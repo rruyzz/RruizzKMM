@@ -25,7 +25,7 @@ import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 @Composable
 fun Carousel(
     movieList: List<Movie>,
-    onAboutButtonClick: (Movie) -> Unit,
+    onAboutButtonClick: (String) -> Unit,
 ) {
     HorizontalMultiBrowseCarousel(
         state = rememberCarouselState {
@@ -42,7 +42,7 @@ fun Carousel(
     ) { index ->
         val movie = movieList[index]
         Box(
-            modifier = Modifier.clickable { onAboutButtonClick(movie) }
+            modifier = Modifier.clickable { onAboutButtonClick(movie.id) }
         ) {
             Image(
                 painter = rememberAsyncImagePainter(model = movie.backdropPath),

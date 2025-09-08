@@ -13,6 +13,8 @@ import androidx.navigation.toRoute
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.HomeScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.Screens
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.DetailScreen
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.login.signin.SignInScreen
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.login.signup.SignUpScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 
 
@@ -40,6 +42,19 @@ fun AppNavHost(
         startDestination = Screens.HOME.route,
         modifier = modifier,
     ) {
+        composable(Screens.SIGN_IN.route) {
+            SignInScreen(
+                onLoginClick = { _, _ -> },
+                onSignUpClick = {}
+            )
+        }
+
+        composable(Screens.SIGN_UP.route) {
+            SignUpScreen(
+                onSignUpClick = { _, _, _ -> },
+                onLoginClick = {}
+            )
+        }
         composable(Screens.HOME.route) {
             HomeScreen(
                 onAboutButtonClick = { movie ->
@@ -47,7 +62,7 @@ fun AppNavHost(
                 },
             )
         }
-        composable<Movie>() { backStackEntry ->
+        composable<String>() { backStackEntry ->
             val args = backStackEntry.toRoute<Movie>()
             DetailScreen(args)
         }

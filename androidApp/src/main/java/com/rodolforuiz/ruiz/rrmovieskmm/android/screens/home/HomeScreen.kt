@@ -42,7 +42,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = getViewModel(),
-    onAboutButtonClick: (Movie) -> Unit,
+    onAboutButtonClick: (String) -> Unit,
 ) {
 
     val homeState = homeViewModel.homeState.collectAsState()
@@ -62,7 +62,7 @@ fun HomeScreen(
 @Composable
 fun HomeView(
     viewModel: HomeViewModel,
-    onAboutButtonClick: (Movie) -> Unit,
+    onAboutButtonClick: (String) -> Unit,
 ) {
 
     val pagerState = rememberPagerState { tabItems.size }
@@ -93,7 +93,7 @@ fun HomeView(
                 viewModel.homeState.value.successState?.nowPlayingList.orEmpty(),
                 viewModel.homeState.value.successState?.topRated.orEmpty(),
                 onAboutButtonClick = {
-                    onAboutButtonClick(it)
+                    onAboutButtonClick(it.id)
                 }
             )
         }
