@@ -14,6 +14,9 @@ class LoginRepositoryImpl(
 ) : LoginRepository {
 
     override fun getLoginResult(): LoginResult {
+        when {
+//            tokenStorage.getToken() != null -> LoginResult.
+        }
         return LoginResult.SignUp
     }
 

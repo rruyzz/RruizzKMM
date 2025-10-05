@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.android.AppScaffold
 import com.rodolforuiz.ruiz.rrmovieskmm.android.MyApplicationTheme
-import com.rodolforuiz.ruiz.rrmovieskmm.main.MainViewModel
+import com.rodolforuiz.ruiz.rrmovieskmm.main.presentation.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : ComponentActivity() {

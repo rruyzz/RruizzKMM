@@ -9,7 +9,7 @@ class TokenStorageImpl : TokenStorage {
 //        settings.putString(TOKEN_KEY, token)
     }
 
-    override fun getToken(): String? = ""
+    override fun getToken(): String? = null
 //    override fun getToken(): String? = settings.getStringOrNull(TOKEN_KEY)
 
     override fun clearToken() {

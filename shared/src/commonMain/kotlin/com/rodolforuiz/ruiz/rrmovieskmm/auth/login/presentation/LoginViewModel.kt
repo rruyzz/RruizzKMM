@@ -2,7 +2,7 @@ package com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation
 
 import com.rodolforuiz.ruiz.rrmovieskmm.BaseViewModel
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.model.login.LoginResult
-import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.usecase.GetLoginResultUseCase
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.provider.LoginProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val useCase: GetLoginResultUseCase
+    private val useCase: LoginProvider
 ) : BaseViewModel() {
     private val _loginState: MutableStateFlow<LoginState> =
         MutableStateFlow(LoginState(loading = true))

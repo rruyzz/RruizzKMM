@@ -14,7 +14,7 @@ import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.Screens
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.DetailScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.login.LoginScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
-import com.rodolforuiz.ruiz.rrmovieskmm.main.MainViewModel
+import com.rodolforuiz.ruiz.rrmovieskmm.main.presentation.MainViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
