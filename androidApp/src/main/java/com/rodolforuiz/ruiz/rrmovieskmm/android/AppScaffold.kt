@@ -1,9 +1,8 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.android
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -15,30 +14,33 @@ import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.Screens
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.DetailScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.login.LoginScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
-
+import com.rodolforuiz.ruiz.rrmovieskmm.main.MainViewModel
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun AppScaffold() {
+fun AppScaffold(mainViewModel: MainViewModel = getViewModel()) {
+    val isLogged by mainViewModel.success.collectAsState()
+
     val navController = rememberNavController()
 
-    Scaffold {
-        AppNavHost(
-            navController = navController,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-        )
+    when {
+        isLogged == true -> {
+            AppNavHost(navController = navController, startDestination = Screens.HOME)
+        }
+        isLogged == false -> {
+            AppNavHost(navController = navController, startDestination = Screens.LOGIN)
+        }
     }
 }
-
 @Composable
 fun AppNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    startDestination: Screens
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.LOGIN.route,
+        startDestination = startDestination.route,
         modifier = modifier,
     ) {
         composable(Screens.LOGIN.route) {

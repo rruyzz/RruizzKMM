@@ -1,4 +1,4 @@
-package com.rodolforuiz.ruiz.rrmovieskmm.android
+package com.rodolforuiz.ruiz.rrmovieskmm.android.screens.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,25 +9,26 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.rodolforuiz.ruiz.rrmovieskmm.android.AppScaffold
+import com.rodolforuiz.ruiz.rrmovieskmm.android.MyApplicationTheme
+import com.rodolforuiz.ruiz.rrmovieskmm.main.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var myViewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        myViewModel = getViewModel()
         val splashscreen = installSplashScreen()
-        var keepSplashScreen = true
-        splashscreen.setKeepOnScreenCondition { keepSplashScreen }
-        lifecycleScope.launch {
-            false.also { keepSplashScreen = it }
-        }
+        splashscreen.setKeepOnScreenCondition {
+            myViewModel.success.value == null }
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     AppScaffold()
                 }

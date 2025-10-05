@@ -11,7 +11,7 @@ val loginModule = module {
 
     single<LoginViewModel> { LoginViewModel(get() )}
     single<GetLoginResultUseCase> { GetLoginResultUseCase(get()) }
-    single<LoginDataSource> { LoginDataSource() }
+    single<LoginDataSource> { LoginDataSource(get()) }
     single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
 
 }
