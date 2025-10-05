@@ -13,6 +13,7 @@ import androidx.navigation.toRoute
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.HomeScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.Screens
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.description.DetailScreen
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.login.LoginScreen
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.Movie
 
 
@@ -37,9 +38,14 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.HOME.route,
+        startDestination = Screens.LOGIN.route,
         modifier = modifier,
     ) {
+        composable(Screens.LOGIN.route) {
+            LoginScreen(
+
+            )
+        }
         composable(Screens.HOME.route) {
             HomeScreen(
                 onAboutButtonClick = { movie ->
