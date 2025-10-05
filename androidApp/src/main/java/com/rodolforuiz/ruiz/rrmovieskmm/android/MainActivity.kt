@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
         var keepSplashScreen = true
         splashscreen.setKeepOnScreenCondition { keepSplashScreen }
         lifecycleScope.launch {
-            delay(5000)
             false.also { keepSplashScreen = it }
         }
         enableEdgeToEdge()

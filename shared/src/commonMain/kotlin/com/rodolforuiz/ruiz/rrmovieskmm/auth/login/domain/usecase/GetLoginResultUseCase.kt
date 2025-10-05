@@ -4,10 +4,10 @@ import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.model.login.LoginResul
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.repository.LoginRepository
 
 
-class GetLoginStatusUseCase(
+class GetLoginResultUseCase(
     private val loginRepository: LoginRepository
 ) {
-    fun getLoginStatus(): LoginResult {
-        return loginRepository.getLoginStatus()
+    fun getLoginResult(): LoginResult {
+        return loginRepository.getLoginResult()
     }
 }

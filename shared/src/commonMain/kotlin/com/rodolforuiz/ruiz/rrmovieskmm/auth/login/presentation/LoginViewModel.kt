@@ -2,13 +2,13 @@ package com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation
 
 import com.rodolforuiz.ruiz.rrmovieskmm.BaseViewModel
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.model.login.LoginResult
-import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.usecase.GetLoginStatusUseCase
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.usecase.GetLoginResultUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val useCase: GetLoginStatusUseCase
+    private val useCase: GetLoginResultUseCase
 ) : BaseViewModel() {
     private val _loginState: MutableStateFlow<LoginState> =
         MutableStateFlow(LoginState(loading = true))
@@ -23,10 +23,12 @@ class LoginViewModel(
 
     }
 
+
+
     private fun getLoginStatus() = scope.launch {
         try {
             _loginState.emit(LoginState(loading = true))
-            val loginStatus = useCase.getLoginStatus()
+            val loginStatus = useCase.getLoginResult()
             _loginState.emit(
                 LoginState(screen = loginStatus.toAction())
             )

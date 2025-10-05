@@ -16,6 +16,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.ErrorMessage
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.Loader
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation.LoginAction
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation.LoginViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -30,55 +33,29 @@ fun LoginScreen(
         SignInScreen(
             onClick = { password, confirmPassword ->
 //                loginViewModel.signIn(password, confirmPassword)
+            })
+
+        when {
+            loginState.value.screen is LoginAction.SignIn -> {
+                SignInScreen(
+                    onClick = { email, password ->
+//                loginViewModel.signIn(password, confirmPassword)
+                    })
             }
-        )
 
-//        when {
-//            loginState.value.screen is LoginAction.SignIn -> {
-//                SignInScreen()
-//            }
-//
-//            loginState.value.screen is LoginAction.SignUp -> {
-//                SignUpScreen()
-//            }
-//
-//            loginState.value.error != null -> {
-//                ErrorMessage(loginState.value.error ?: "dsfds")
-//            }
-//
-//            loginState.value.loading -> {
-//                Loader()
-//            }
-//        }
-    }
-}
+            loginState.value.screen is LoginAction.SignUp -> {
+                SignUpScreen(
+                    onClick = { email, confirmPassword ->
+//                loginViewModel.signIn(password, confirmPassword)
+                    })
+            }
 
-@Composable
-fun SignUpScreen(
-    onClick: (String, String) -> Unit
-) {
-    var text by remember { mutableStateOf("") }
-    var confirmText by remember { mutableStateOf("") }
+            loginState.value.error != null -> {
+                ErrorMessage(loginState.value.error ?: "dsfds")
+            }
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column {
-            OutlinedTextField(
-                value = text,
-                onValueChange = { newText -> text = newText },
-                label = { Text("Enter your email") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            OutlinedTextField(
-                value = confirmText,
-                onValueChange = { newText -> confirmText = newText },
-                label = { Text("Confirm your email") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Button(onClick = { onClick(text, confirmText) }) {
-                Text("Criar conta")
+            loginState.value.loading -> {
+                Loader()
             }
         }
     }
@@ -86,30 +63,70 @@ fun SignUpScreen(
 
 @Composable
 fun SignInScreen(
-    onClick: (String, String) -> Unit,
+    onClick: (String, String) -> Unit
 ) {
-    var text by remember { mutableStateOf("") }
-    var confirmText by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         Column {
             OutlinedTextField(
-                value = text,
-                onValueChange = { newText -> text = newText },
+                value = email,
+                onValueChange = { newText -> email = newText },
                 label = { Text("Enter your email") },
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
-                value = confirmText,
-                onValueChange = { newText -> confirmText = newText },
+                value = password,
+                onValueChange = { newText -> password = newText },
                 label = { Text("Confirm your password") },
                 modifier = Modifier.fillMaxWidth()
             )
-            Button(onClick = { onClick(text, confirmText) }) {
-                Text("Criar conta")
+            Button(onClick = { onClick(email, password) }) {
+                Text("SignUp")
+            }
+        }
+    }
+}
+
+@Composable
+fun SignUpScreen(
+    onClick: (String, String) -> Unit,
+) {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
+    Box(
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+    ) {
+        Column {
+            OutlinedTextField(
+                value = email,
+                onValueChange = { newText -> email = newText },
+                label = { Text("Enter your email") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            OutlinedTextField(
+                value = password,
+                onValueChange = { newText -> password = newText },
+                label = { Text("Enter your password") },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            OutlinedTextField(
+                value = confirmPassword,
+                onValueChange = { newText -> confirmPassword = newText },
+                label = { Text("Enter your password") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Button(
+                onClick = { onClick(email, confirmPassword) },
+                enabled = password == confirmPassword && password != ""
+            ) {
+                Text("Criar Conta")
             }
         }
     }

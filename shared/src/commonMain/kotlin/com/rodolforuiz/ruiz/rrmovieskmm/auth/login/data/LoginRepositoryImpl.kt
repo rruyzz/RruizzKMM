@@ -7,10 +7,10 @@ import com.rodolforuiz.ruiz.rrmovieskmm.auth.token.domain.repository.TokenStorag
 
 
 class LoginRepositoryImpl(
-    private val repository: TokenStorage
+    private val tokenStorage: TokenStorage
 ): LoginRepository {
 
-    override fun getLoginStatus(): LoginResult {
+    override fun getLoginResult(): LoginResult {
         return LoginResult.SignUp
     }
 }
