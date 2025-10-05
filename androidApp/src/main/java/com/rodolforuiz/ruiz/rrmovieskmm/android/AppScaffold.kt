@@ -43,7 +43,9 @@ fun AppNavHost(
     ) {
         composable(Screens.LOGIN.route) {
             LoginScreen(
-
+                success = {
+                    navController.navigate(Screens.HOME.route)
+                },
             )
         }
         composable(Screens.HOME.route) {

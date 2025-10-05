@@ -25,29 +25,29 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
+    success: (Unit) -> Unit,
     loginViewModel: LoginViewModel = getViewModel(),
 ) {
     val loginState = loginViewModel.loginState.collectAsState()
 
     Column {
-        SignInScreen(
-            onClick = { password, confirmPassword ->
-//                loginViewModel.signIn(password, confirmPassword)
-            })
-
         when {
-            loginState.value.screen is LoginAction.SignIn -> {
-                SignInScreen(
+            loginState.value.screen is LoginAction.SignUp -> {
+                SignUpScreen(
                     onClick = { email, password ->
-//                loginViewModel.signIn(password, confirmPassword)
+                        loginViewModel.signUp(email, password)
                     })
             }
 
-            loginState.value.screen is LoginAction.SignUp -> {
-                SignUpScreen(
-                    onClick = { email, confirmPassword ->
-//                loginViewModel.signIn(password, confirmPassword)
+            loginState.value.screen is LoginAction.SignIn -> {
+                SignInScreen(
+                    onClick = { email, password ->
+                        loginViewModel.signIn(email, password)
                     })
+            }
+
+            loginState.value.screen is LoginAction.NavigateHome -> {
+                success(Unit)
             }
 
             loginState.value.error != null -> {
@@ -55,6 +55,8 @@ fun LoginScreen(
             }
 
             loginState.value.loading -> {
+                println("Rodolfeira loading")
+
                 Loader()
             }
         }
@@ -85,7 +87,7 @@ fun SignInScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Button(onClick = { onClick(email, password) }) {
-                Text("SignUp")
+                Text("Logar")
             }
         }
     }

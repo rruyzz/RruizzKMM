@@ -1,5 +1,6 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.auth.login.di
 
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.data.LoginDataSource
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.data.LoginRepositoryImpl
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.repository.LoginRepository
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.usecase.GetLoginResultUseCase
@@ -10,6 +11,7 @@ val loginModule = module {
 
     single<LoginViewModel> { LoginViewModel(get() )}
     single<GetLoginResultUseCase> { GetLoginResultUseCase(get()) }
-    single<LoginRepository> { LoginRepositoryImpl(get()) }
+    single<LoginDataSource> { LoginDataSource() }
+    single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
 
 }

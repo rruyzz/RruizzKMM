@@ -5,6 +5,8 @@ import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.model.login.LoginResul
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.usecase.GetLoginResultUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -19,10 +21,31 @@ class LoginViewModel(
         getLoginStatus()
     }
 
-    fun signIn(password: String, confirmPassword: String) {
-
+    fun signIn(email: String, confirmPassword: String) = scope.launch {
+        useCase.signIn(email, confirmPassword)
+            .onStart {
+                _loginState.emit(LoginState(loading = true))
+            }
+            .catch { e ->
+                _loginState.emit(LoginState(error = e.message))
+            }
+            .collect {
+                _loginState.emit( LoginState(screen = LoginAction.NavigateHome))
+            }
     }
 
+    fun signUp(email: String, confirmPassword: String) = scope.launch {
+        useCase.signUp(email, confirmPassword)
+            .onStart {
+                _loginState.emit(LoginState(loading = true))
+            }
+            .catch { e ->
+                _loginState.emit(LoginState(error = e.message, loading = false))
+            }
+            .collect { token ->
+                _loginState.emit( LoginState(screen = LoginAction.SignIn))
+            }
+    }
 
 
     private fun getLoginStatus() = scope.launch {
