@@ -1,4 +1,4 @@
-package com.rodolforuiz.ruiz.rrmovieskmm.login.domain.model.token
+package com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.model.token
 
 sealed class TokenResult {
     data object Success: TokenResult()

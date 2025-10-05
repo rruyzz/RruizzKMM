@@ -1,8 +1,8 @@
-package com.rodolforuiz.ruiz.rrmovieskmm.login.presentation
+package com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation
 
 import com.rodolforuiz.ruiz.rrmovieskmm.BaseViewModel
-import com.rodolforuiz.ruiz.rrmovieskmm.login.domain.model.login.LoginResult
-import com.rodolforuiz.ruiz.rrmovieskmm.login.domain.usecase.GetLoginStatusUseCase
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.model.login.LoginResult
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.usecase.GetLoginStatusUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

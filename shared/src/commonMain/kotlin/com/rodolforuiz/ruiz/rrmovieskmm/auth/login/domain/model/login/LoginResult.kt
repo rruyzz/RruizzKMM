@@ -1,4 +1,4 @@
-package com.rodolforuiz.ruiz.rrmovieskmm.login.domain.model.login
+package com.rodolforuiz.ruiz.rrmovieskmm.auth.login.domain.model.login
 
 sealed class LoginResult {
     data object SignIn : LoginResult()

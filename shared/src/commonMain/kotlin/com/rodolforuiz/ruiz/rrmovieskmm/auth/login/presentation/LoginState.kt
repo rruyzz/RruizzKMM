@@ -1,4 +1,4 @@
-package com.rodolforuiz.ruiz.rrmovieskmm.login.presentation
+package com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation
 
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.model.HomeSuccessContent
 

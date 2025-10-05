@@ -16,7 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.rodolforuiz.ruiz.rrmovieskmm.login.presentation.LoginViewModel
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation.LoginViewModel
 import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
