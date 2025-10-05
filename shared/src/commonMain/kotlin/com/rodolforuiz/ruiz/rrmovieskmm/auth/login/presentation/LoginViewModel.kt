@@ -21,7 +21,7 @@ class LoginViewModel(
         getLoginStatus()
     }
 
-    fun signIn(email: String, confirmPassword: String) = scope.launch {
+    fun signIn(email: String, confirmPassword: String, onSuccess: (Unit) -> (Unit)) = scope.launch {
         useCase.signIn(email, confirmPassword)
             .onStart {
                 _loginState.emit(LoginState(loading = true))
@@ -30,7 +30,7 @@ class LoginViewModel(
                 _loginState.emit(LoginState(error = e.message))
             }
             .collect {
-                _loginState.emit( LoginState(screen = LoginAction.NavigateHome))
+                onSuccess(Unit)
             }
     }
 

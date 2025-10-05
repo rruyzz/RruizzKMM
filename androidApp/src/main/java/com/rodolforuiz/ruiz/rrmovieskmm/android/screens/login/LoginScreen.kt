@@ -42,12 +42,14 @@ fun LoginScreen(
             loginState.value.screen is LoginAction.SignIn -> {
                 SignInScreen(
                     onClick = { email, password ->
-                        loginViewModel.signIn(email, password)
-                    })
-            }
-
-            loginState.value.screen is LoginAction.NavigateHome -> {
-                success(Unit)
+                        loginViewModel.signIn(
+                            email,
+                            password,
+                            onSuccess = { unit ->
+                                success(unit)
+                            })
+                    }
+                )
             }
 
             loginState.value.error != null -> {
