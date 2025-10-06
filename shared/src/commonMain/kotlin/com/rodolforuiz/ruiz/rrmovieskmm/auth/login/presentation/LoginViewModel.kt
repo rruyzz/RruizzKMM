@@ -18,7 +18,7 @@ class LoginViewModel(
 
 
     init {
-        getLoginStatus()
+//        getLoginStatus()
     }
 
     fun signIn(email: String, confirmPassword: String, onSuccess: (Unit) -> (Unit)) = scope.launch {
@@ -48,7 +48,7 @@ class LoginViewModel(
     }
 
 
-    private fun getLoginStatus() = scope.launch {
+    fun getLoginStatus() = scope.launch {
         try {
             _loginState.emit(LoginState(loading = true))
             val loginStatus = useCase.getLoginResult()
@@ -64,6 +64,7 @@ class LoginViewModel(
         is LoginResult.SignIn -> LoginAction.SignIn
         is LoginResult.SignUp -> LoginAction.SignUp
         is LoginResult.Logout -> LoginAction.Logout
+        is LoginResult.Home -> LoginAction.Home
     }
 }
 

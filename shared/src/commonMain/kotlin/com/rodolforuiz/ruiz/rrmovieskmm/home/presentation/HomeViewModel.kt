@@ -19,7 +19,9 @@ class HomeViewModel(
     init {
         handleGet()
     }
-
+    fun logOut() {
+        homeFactory.logOut()
+    }
     private fun handleGet() = scope.launch {
         try {
             _homeState.emit(HomeState(loading = true))

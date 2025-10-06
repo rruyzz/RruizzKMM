@@ -45,6 +45,7 @@ fun AppNavHost(
     ) {
         composable(Screens.LOGIN.route) {
             LoginScreen(
+                navController = navController,
                 success = {
                     navController.navigate(Screens.HOME.route)
                 },
@@ -52,6 +53,7 @@ fun AppNavHost(
         }
         composable(Screens.HOME.route) {
             HomeScreen(
+                navController = navController,
                 onAboutButtonClick = { movie ->
                     navController.navigate(movie)
                 },

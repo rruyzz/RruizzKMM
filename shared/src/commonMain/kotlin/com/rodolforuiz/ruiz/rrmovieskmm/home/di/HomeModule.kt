@@ -11,6 +11,6 @@ val homeModule = module {
 
     single<HomeService> { HomeService(get()) }
     single<PopularMoviesUseCase> { PopularMoviesUseCase(get()) }
-    single<HomeViewModel> { HomeViewModel(HomeFactory(get())) }
+    single<HomeViewModel> { HomeViewModel(HomeFactory(get(), get())) }
     single<HomeRepository> { HomeRepository(get()) }
 }

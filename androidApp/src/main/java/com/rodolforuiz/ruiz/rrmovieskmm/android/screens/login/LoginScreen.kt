@@ -9,6 +9,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,6 +17,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.Screens
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.ErrorMessage
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.Loader
 import com.rodolforuiz.ruiz.rrmovieskmm.auth.login.presentation.LoginAction
@@ -25,10 +28,15 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
+    navController: NavHostController,
     success: (Unit) -> Unit,
     loginViewModel: LoginViewModel = getViewModel(),
 ) {
     val loginState = loginViewModel.loginState.collectAsState()
+
+    LaunchedEffect(key1 = Unit) {
+        loginViewModel.getLoginStatus()
+    }
 
     Column {
         when {
@@ -47,6 +55,19 @@ fun LoginScreen(
                             password,
                             onSuccess = { unit ->
                                 success(unit)
+                            })
+                    }
+                )
+            }
+
+            loginState.value.screen is LoginAction.Home -> {
+                SignInScreen(
+                    onClick = { email, password ->
+                        loginViewModel.signIn(
+                            email,
+                            password,
+                            onSuccess = { unit ->
+                                navController.navigate(Screens.HOME.route)
                             })
                     }
                 )
