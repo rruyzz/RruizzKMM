@@ -31,6 +31,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.Carousel
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.HomeHorizontalPager
 import com.rodolforuiz.ruiz.rrmovieskmm.android.screens.home.components.TabRowHome
@@ -41,6 +42,7 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     homeViewModel: HomeViewModel = getViewModel(),
     onAboutButtonClick: (Movie) -> Unit,
 ) {
@@ -51,7 +53,7 @@ fun HomeScreen(
         if (homeState.value.error != null)
             ErrorMessage(homeState.value.error ?: "dsfds")
         if (homeState.value.successState?.popularMovies?.isNotEmpty() == true)
-            HomeView(homeViewModel, onAboutButtonClick = { onAboutButtonClick(it) })
+            HomeView(homeViewModel, onAboutButtonClick = { onAboutButtonClick(it) }, navController = navController)
         if (homeState.value.loading) {
             Loader()
         }
@@ -63,12 +65,13 @@ fun HomeScreen(
 fun HomeView(
     viewModel: HomeViewModel,
     onAboutButtonClick: (Movie) -> Unit,
+    navController: NavHostController,
 ) {
 
     val pagerState = rememberPagerState { tabItems.size }
-
+    val state = viewModel.homeState.collectAsState()
     PullToRefreshBox(
-        isRefreshing = viewModel.homeState.value.loading,
+        isRefreshing = state.value.loading,
         onRefresh = {
             viewModel.refresh()
         },
@@ -78,10 +81,13 @@ fun HomeView(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            Title(viewModel.homeState.value.successState?.title.orEmpty())
+            Title(state.value.successState?.title.orEmpty(), onAboutButtonClick = {
+                viewModel.logOut()
+                navController.popBackStack()
+            })
             HomeSearch(viewModel, onQueryChange = { })
             Carousel(
-                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
+                state.value.successState?.popularMovies.orEmpty(),
                 onAboutButtonClick = {
                     onAboutButtonClick(it)
                 }
@@ -89,9 +95,9 @@ fun HomeView(
             TabRowHome(pagerState)
             HomeHorizontalPager(
                 pagerState,
-                viewModel.homeState.value.successState?.popularMovies.orEmpty(),
-                viewModel.homeState.value.successState?.nowPlayingList.orEmpty(),
-                viewModel.homeState.value.successState?.topRated.orEmpty(),
+                state.value.successState?.popularMovies.orEmpty(),
+                state.value.successState?.nowPlayingList.orEmpty(),
+                state.value.successState?.topRated.orEmpty(),
                 onAboutButtonClick = {
                     onAboutButtonClick(it)
                 }
@@ -151,11 +157,15 @@ fun HomeSearch(
 }
 
 @Composable
-fun Title(title: String) {
+fun Title(title: String, onAboutButtonClick: (Unit) -> Unit) {
     Text(
         text = title,
         style = MaterialTheme.typography.titleMedium,
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier
+            .padding(16.dp)
+            .clickable {
+                onAboutButtonClick(Unit)
+            }
     )
 }
 

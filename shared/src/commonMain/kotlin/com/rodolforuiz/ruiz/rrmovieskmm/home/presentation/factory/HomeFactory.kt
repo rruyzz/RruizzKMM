@@ -1,9 +1,10 @@
 package com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.factory
 
+import com.rodolforuiz.ruiz.rrmovieskmm.auth.token.domain.repository.TokenStorage
 import com.rodolforuiz.ruiz.rrmovieskmm.home.domain.PopularMoviesUseCase
 import com.rodolforuiz.ruiz.rrmovieskmm.home.presentation.model.HomeSuccessContent
 
-class HomeFactory(private val useCase: PopularMoviesUseCase) {
+class HomeFactory(private val useCase: PopularMoviesUseCase, private val tokenStorage: TokenStorage) {
 
     suspend operator fun invoke(): HomeSuccessContent {
         val nowMovies = useCase.getNowMovies()
@@ -15,5 +16,9 @@ class HomeFactory(private val useCase: PopularMoviesUseCase) {
             nowPlayingList = nowMovies,
             topRated = topRated,
         )
+    }
+
+    fun logOut() {
+        tokenStorage.clearToken()
     }
 }
