@@ -89,7 +89,7 @@ struct GridLayout: View {
                           MovieCard(title: image.title, imageName: image.posterPath)
                       }
                       .navigationDestination(for: Int.self) { id in
-                          DetailScreen(viewModel: .init(), id: id)
+                          DetailScreen(viewModel: .init(movie: image), id: id)
                       }
                   }
               }

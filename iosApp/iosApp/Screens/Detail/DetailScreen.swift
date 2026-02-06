@@ -8,8 +8,9 @@ extension DetailScreen {
         let detailViewModel: DetailViewModel
         
         
-        init() {
-            detailViewModel = HomeInjector().detailViewModel
+        init(movie: Movie) {
+            print("Rodolfeira, init \(movie)!")
+            detailViewModel = HomeInjector().provideDetailViewModel(movie: movie)
             detailState = detailViewModel.detailState.value
         }
         
